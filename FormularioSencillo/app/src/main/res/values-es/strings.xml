@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FormularioSencillo</string>
+    <string name="insert_name">Introduce tu nombre</string>
+    <string name="write_here">Escribe aquí</string>
+    <string name="man">Hombre</string>
+    <string name="woman">Mujer</string>
+    <string name="other">Otro</string>
+    <string name="data_consent">Consiento el uso datos con fines comerciales</string>
+    <string name="birthdate">Fecha de nacimiento</string>
+    <string name="accept">Aceptar</string>
+    <string name="secondary_education">Educación secundaria obligatoria</string>
+    <string name="baccalaureate">Bachillerato o ciclo formativo de grado medio</string>
+    <string name="grado">Estudios de grado o ciclo formativo de grado superior</string>
+    <string name="postgrado">Estudios de postgrado</string>
+    <string name="nivel_estudios">Nivel de estudios</string>
+</resources>

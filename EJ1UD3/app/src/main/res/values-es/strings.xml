@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">EJ1UD3</string>
+    <string name="insert_name">Inserta tu nombre</string>
+    <string name="write_here">Escribe aquí</string>
+    <string name="insert_apellidos">Inserte sus apellidos</string>
+    <string name="fecha_inicio">Fecha de inicio</string>
+    <string name="fecha_fin">Fecha fin</string>
+    <string name="mayor_de_edad">Soy mayor de edad</string>
+    <string name="espanol">Español</string>
+    <string name="ingles">Inglés</string>
+    <string name="frances">Francés</string>
+    <string name="aleman">Alemán</string>
+    <string name="accept">Aceptar</string>
+    <string name="chose_language">Elija el idioma que quiere aprender</string>
+</resources>
