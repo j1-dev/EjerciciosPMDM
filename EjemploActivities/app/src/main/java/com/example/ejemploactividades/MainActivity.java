@@ -1,7 +1,13 @@
 package com.example.ejemploactividades;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -13,6 +19,18 @@ public class MainActivity extends AppCompatActivity {
     private String nombre;
     private int edad;
     private boolean consentimiento;
+
+    private ActivityResultLauncher<Intent> modificarResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result){
+                    if (result.getResultCode() == Activity.RESULT_OK){
+                        Intent data = result.getData();
+                    }
+                }
+            }
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         TextView tvNombre = findViewById(R.id.tv_nombre);
         TextView tvEdad=findViewById(R.id.tv_edad);
         TextView tvConsentimiento=findViewById(R.id.tv_consentimiento);
-        Resources res = getResources();
         tvNombre.setText("Nombre: " + nombre);
         tvEdad.setText("Edad: " + edad);
         if(consentimiento){
@@ -50,7 +67,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void editar(View view){
         Intent myIntent = new Intent().setClass(this, Modificar.class);
-        startActivity(myIntent);
-
+        myIntent.putExtra("nombre", nombre);
+        myIntent.putExtra("edad", edad);
+        myIntent.putExtra("consentimiento", consentimiento);
+        modificarResultLauncher.launch(myIntent);
     }
+
+
 }
