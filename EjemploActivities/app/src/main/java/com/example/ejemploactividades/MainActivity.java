@@ -27,25 +27,20 @@ public class MainActivity extends AppCompatActivity {
                 public void onActivityResult(ActivityResult result){
                     if (result.getResultCode() == Activity.RESULT_OK){
                         Intent data = result.getData();
+                        nombre = data.getStringExtra("nombre");
+                        edad = data.getIntExtra("edad", -1);
+                        consentimiento = data.getBooleanExtra("consentimiento", false);
+                        System.out.println(nombre);
+                        System.out.println(edad);
+                        System.out.println(consentimiento);
+                        actualizarInterfaz();
                     }
                 }
             }
     );
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        if(savedInstanceState==null){
-            nombre = "Pepe";
-            edad = 52;
-            consentimiento = false;
-        } else {
-            nombre=savedInstanceState.getString("nombre");
-            edad=savedInstanceState.getInt("edad");
-            consentimiento=savedInstanceState.getBoolean("consentimiento");
-        }
-        TextView tvNombre = findViewById(R.id.tv_nombre);
+    private void actualizarInterfaz(){
+        TextView tvNombre=findViewById(R.id.tv_nombre);
         TextView tvEdad=findViewById(R.id.tv_edad);
         TextView tvConsentimiento=findViewById(R.id.tv_consentimiento);
         tvNombre.setText("Nombre: " + nombre);
@@ -55,6 +50,22 @@ public class MainActivity extends AppCompatActivity {
         } else {
             tvConsentimiento.setText("No consiente");
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        if(savedInstanceState==null){
+            nombre = "Juan";
+            edad = 24;
+            consentimiento = true;
+        } else {
+            nombre=savedInstanceState.getString("nombre");
+            edad=savedInstanceState.getInt("edad");
+            consentimiento=savedInstanceState.getBoolean("consentimiento");
+        }
+        actualizarInterfaz();
     }
 
     @Override

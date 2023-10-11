@@ -21,7 +21,7 @@ public class Modificar extends AppCompatActivity {
         if(savedInstanceState==null){
             Intent intent = getIntent();
             nombre = intent.getStringExtra("nombre");
-            edad = intent.getIntExtra("edad", 0);
+            edad = intent.getIntExtra("edad", -1);
             consentimiento = intent.getBooleanExtra("consentimiento", false);
         } else {
             nombre=savedInstanceState.getString("nombre");
@@ -32,7 +32,7 @@ public class Modificar extends AppCompatActivity {
         EditText etEdad=findViewById(R.id.et_edad);
         CheckBox cbConsentimiento=findViewById(R.id.cb_consentimiento);
         etNombre.setText(nombre);
-        etEdad.setText(edad);
+        etEdad.setText(edad+"");
         cbConsentimiento.setChecked(consentimiento);
     }
 
@@ -52,7 +52,7 @@ public class Modificar extends AppCompatActivity {
         outState.putBoolean("consentimiento", consentimiento);
     }
 
-    public void aceptar(View view){
+    public void guardar(View view){
         EditText etNombre=findViewById(R.id.et_nombre);
         EditText etEdad=findViewById(R.id.et_edad);
         CheckBox cbConsentimiento=findViewById(R.id.cb_consentimiento);
