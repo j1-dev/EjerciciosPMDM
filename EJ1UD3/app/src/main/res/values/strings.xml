@@ -3,13 +3,23 @@
     <string name="insert_name">Insert your name</string>
     <string name="write_here">Write here...</string>
     <string name="insert_apellidos">Insert your surname</string>
+    <string name="nombre">Name</string>
+    <string name="apellidos">Surname</string>
     <string name="fecha_inicio">Start date</string>
     <string name="fecha_fin">Finish date</string>
+    <string name="nacionalidad">Nationality</string>
     <string name="mayor_de_edad">I\'m 18+</string>
     <string name="espanol">Spanish</string>
     <string name="ingles">English</string>
     <string name="frances">French</string>
     <string name="aleman">German</string>
     <string name="accept">Accept</string>
-    <string name="chose_language">Chose the language you want to learn</string>
+    <string name="choose_language">Language you wish to learn</string>
+    <string name="chino">Chinese</string>
+    <string name="ruso">Russian</string>
+    <string name="es_mayor">You are +18</string>
+    <string name="no_es_mayor">You are not +18</string>
+    <string name="error_fechas">The dates are not valid</string>
+    <string name="error_campos">All fields must be filled</string>
+    <string name="debe_ser_mayor">Must be +18</string>
 </resources>

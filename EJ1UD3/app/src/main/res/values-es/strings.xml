@@ -3,13 +3,23 @@
     <string name="insert_name">Inserta tu nombre</string>
     <string name="write_here">Escribe aquí</string>
     <string name="insert_apellidos">Inserte sus apellidos</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellidos">Apellidos</string>
     <string name="fecha_inicio">Fecha de inicio</string>
     <string name="fecha_fin">Fecha fin</string>
+    <string name="nacionalidad">Nacionalidad</string>
     <string name="mayor_de_edad">Soy mayor de edad</string>
     <string name="espanol">Español</string>
     <string name="ingles">Inglés</string>
     <string name="frances">Francés</string>
     <string name="aleman">Alemán</string>
     <string name="accept">Aceptar</string>
-    <string name="chose_language">Elija el idioma que quiere aprender</string>
+    <string name="choose_language">Idioma que quiere aprender</string>
+    <string name="chino">Chino</string>
+    <string name="ruso">Ruso</string>
+    <string name="es_mayor">Es mayor de edad</string>
+    <string name="no_es_mayor">No es mayor de edad</string>
+    <string name="error_fechas">Las fechas no son válidas</string>
+    <string name="error_campos">Todos los campos tienen que estar rellenos</string>
+    <string name="debe_ser_mayor">Debe tener más de 18 años</string>
 </resources>
