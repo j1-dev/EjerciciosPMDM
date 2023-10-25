@@ -21,7 +21,7 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     private String nombre;
-    private int apellidos;
+    private String apellidos;
     private Date fecha;
     private String genero;
     private String provincia;
@@ -35,18 +35,11 @@ public class MainActivity extends AppCompatActivity {
                     if (result.getResultCode() == Activity.RESULT_OK){
                         Intent data = result.getData();
                         nombre = data.getStringExtra("nombre");
-                        apellidos = data.getIntExtra("apellidos", -1);
-                        try {
-                            fecha = new SimpleDateFormat("dd/MM/yyyy").parse(data.getStringExtra("fecha"));
-                        } catch (ParseException e) {
-                            throw new RuntimeException(e);
-                        }
+                        apellidos = data.getStringExtra("apellidos");
+                        fecha=new Date(data.getLongExtra("fecha",-1));
                         genero = data.getStringExtra("genero");
                         provincia = data.getStringExtra("provincia");
                         consentimiento = data.getBooleanExtra("consentimiento", false);
-                        System.out.println(nombre);
-                        System.out.println(apellidos);
-                        System.out.println(consentimiento);
                         actualizarInterfaz();
                     }
                 }
@@ -62,13 +55,13 @@ public class MainActivity extends AppCompatActivity {
         TextView tvConsentimiento=findViewById(R.id.tv_consentimiento);
         tvNombre.setText("Nombre: " + nombre);
         tvApellidos.setText("Apellidos: " + apellidos);
-        tvFecha.setText("Fecha de nacimiento: " + fecha);
+        tvFecha.setText("Fecha de nacimiento: " + fecha.toString());
         tvGenero.setText("Genero: " + genero);
         tvProvincia.setText("Provincia: " + provincia);
         if(consentimiento){
-            tvConsentimiento.setText("Consiente");
+            tvConsentimiento.setText("Consiente al tratamiento de sus datos");
         } else {
-            tvConsentimiento.setText("No consiente");
+            tvConsentimiento.setText("No consiente al tratamiento de sus datos");
         }
     }
 
@@ -78,19 +71,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         if(savedInstanceState==null){
             nombre = "Juan";
-            apellidos = 24;
+            apellidos = "Garcia Marin";
             fecha = new Date();
             genero = "Masculino";
-            provincia = "Malaga";
+            provincia = "Málaga";
             consentimiento = true;
         } else {
             nombre=savedInstanceState.getString("nombre");
-            apellidos=savedInstanceState.getInt("apellidos");
-            try {
-                fecha = new SimpleDateFormat("dd/MM/yyyy").parse(savedInstanceState.getString("fecha"));
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
+            apellidos=savedInstanceState.getString("apellidos");
+            fecha=new Date(savedInstanceState.getLong("fecha"));
             genero = savedInstanceState.getString("genero");
             provincia = savedInstanceState.getString("provincia");
             consentimiento=savedInstanceState.getBoolean("consentimiento");
@@ -102,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
     public void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
         outState.putString("nombre", nombre);
-        outState.putInt("apellidos", apellidos);
-        outState.putString("fecha", fecha.toString());
+        outState.putString("apellidos", apellidos);
+        outState.putLong("fecha", fecha.getTime());
         outState.putString("genero", genero);
         outState.putString("provincia", provincia);
         outState.putBoolean("consentimiento", consentimiento);
@@ -113,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         Intent myIntent = new Intent().setClass(this, Modificar.class);
         myIntent.putExtra("nombre", nombre);
         myIntent.putExtra("apellidos", apellidos);
-        myIntent.putExtra("fecha", fecha);
+        myIntent.putExtra("fecha", fecha.getTime());
         myIntent.putExtra("genero", genero);
         myIntent.putExtra("provincia", provincia);
         myIntent.putExtra("consentimiento", consentimiento);

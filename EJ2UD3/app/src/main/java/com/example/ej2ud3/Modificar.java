@@ -23,11 +23,10 @@ import java.util.Date;
 public class Modificar extends AppCompatActivity {
 
     private String nombre;
-    private int apellidos;
+    private String apellidos;
     private Date fecha;
     private DatePickerDialog dpdFecha;
     private EditText etFecha;
-    private String sFecha;
     private String genero;
     private String provincia;
     private boolean consentimiento;
@@ -35,43 +34,72 @@ public class Modificar extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modificar);
+
         if(savedInstanceState==null){
             Intent intent = getIntent();
             nombre = intent.getStringExtra("nombre");
-            apellidos = intent.getIntExtra("apellidos", -1);
-            try {
-                fecha = new SimpleDateFormat("dd/MM/yyyy").parse(intent.getStringExtra("fecha"));
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
+            apellidos = intent.getStringExtra("apellidos");
+            fecha=new Date(intent.getLongExtra("fecha",-1));
             genero = intent.getStringExtra("genero");
             provincia = intent.getStringExtra("provincia");
             consentimiento = intent.getBooleanExtra("consentimiento", false);
         } else {
             nombre=savedInstanceState.getString("nombre");
-            apellidos=savedInstanceState.getInt("apellidos");
-            try {
-                fecha = new SimpleDateFormat("dd/MM/yyyy").parse(savedInstanceState.getString("fecha"));
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
+            apellidos=savedInstanceState.getString("apellidos");
+            fecha=new Date(savedInstanceState.getLong("fecha",-1));
             genero = savedInstanceState.getString("genero");
             provincia = savedInstanceState.getString("provincia");
             consentimiento=savedInstanceState.getBoolean("consentimiento");
         }
+
         EditText etNombre=findViewById(R.id.et_nombre);
         EditText etApellidos=findViewById(R.id.et_apellidos);
+        if(etFecha==null) {
+            etFecha=findViewById(R.id.et_fecha);
+        }
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd MM yyyy");
+        Spinner sGenero=findViewById(R.id.s_genero);
+        Spinner sProvincia=findViewById(R.id.s_provincia);
         CheckBox cbConsentimiento=findViewById(R.id.cb_consentimiento);
-        etNombre.setText(nombre);
-        etApellidos.setText(apellidos+"");
-        cbConsentimiento.setChecked(consentimiento);
+
         prepararFecha(fecha);
         populateSpinners();
+
+        etNombre.setText(nombre);
+        etApellidos.setText(apellidos);
+        etFecha.setText(dateFormatter.format(fecha.getTime()));
+        sGenero.setSelection(getGeneroIndex(genero));
+        sProvincia.setSelection(getProvinciaIndex(provincia));
+        cbConsentimiento.setChecked(consentimiento);
+
     }
 
-    private void prepararFechas(Date date){
-        EditText etFecha;
-        if(date==null) {
+    private int getGeneroIndex(String genero){
+        switch (genero){
+            case "Masculino": return 0;
+            case "Femenino": return 1;
+            case "No Binario": return 2;
+            case "Prefiere no decir": return 3;
+            default: return -1;
+        }
+    }
+
+    private int getProvinciaIndex(String provincia){
+        switch (provincia){
+            case "Almería": return 0;
+            case "Cádiz": return 1;
+            case "Córdoba": return 2;
+            case "Granada": return 3;
+            case "Huelva": return 4;
+            case "Jaén": return 5;
+            case "Málaga": return 6;
+            case "Sevilla": return 7;
+            default: return -1;
+        }
+    }
+
+    private void prepararFecha(Date date){
+        if(etFecha==null) {
             etFecha=findViewById(R.id.et_fecha);
         }
 
@@ -79,46 +107,60 @@ public class Modificar extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus) {
-                    dpdInicio.show();
+                    dpdFecha.show();
                 }
                 v.clearFocus();
             }
         });
 
 
-        Calendar calendarInicio = Calendar.getInstance();
-        calendarInicio.setTime(inicio);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fecha);
 
-        dpdInicio = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+        dpdFecha = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
                 SimpleDateFormat dateFormatter = new SimpleDateFormat("dd MM yyyy");
-                etFechaInicio.setText(dateFormatter.format(newDate.getTime()));
+                etFecha.setText(dateFormatter.format(newDate.getTime()));
             }
-        },calendarInicio.get(Calendar.YEAR), calendarInicio.get(Calendar.MONTH),
-                calendarInicio.get(Calendar.DAY_OF_MONTH));
+        },calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH));
 
 
     }
 
     private void populateSpinners(){
-        Resources res = getResources();
-        Spinner sestudios = (Spinner) findViewById(R.id.s_estudios);
-        ArrayList<String> estudios = new ArrayList<>();
+        Spinner generoSpinner = (Spinner) findViewById(R.id.s_genero);
+        Spinner provinciaSpinner = (Spinner) findViewById(R.id.s_provincia);
 
-        estudios.add(res.getString(R.string.choose_language));
-        estudios.add(res.getString(R.string.frances));
-        estudios.add(res.getString(R.string.espanol));
-        estudios.add(res.getString(R.string.ingles));
-        estudios.add(res.getString(R.string.aleman));
-        estudios.add(res.getString(R.string.chino));
-        estudios.add(res.getString(R.string.ruso));
+        ArrayList<String> generos = new ArrayList<>();
+
+        generos.add("Masculino");
+        generos.add("Femenino");
+        generos.add("No Binario");
+        generos.add("Prefiere no decir");
 
         ArrayAdapter<String> adestudios = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,
-                estudios);
+                generos);
         adestudios.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sestudios.setAdapter(adestudios);
+        generoSpinner.setAdapter(adestudios);
+
+        ArrayList<String> provincias = new ArrayList<>();
+
+        provincias.add("Almería");
+        provincias.add("Cádiz");
+        provincias.add("Córdoba");
+        provincias.add("Granada");
+        provincias.add("Huelva");
+        provincias.add("Jaén");
+        provincias.add("Málaga");
+        provincias.add("Sevilla");
+
+        ArrayAdapter<String> adprovincias = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,
+                provincias);
+        adprovincias.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        provinciaSpinner.setAdapter(adprovincias);
     }
 
     @Override
@@ -126,30 +168,78 @@ public class Modificar extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         EditText etNombre=findViewById(R.id.et_nombre);
         EditText etApellidos=findViewById(R.id.et_apellidos);
+        if(etFecha==null) {
+            etFecha=findViewById(R.id.et_fecha);
+        }
+        Spinner sGenero = (Spinner) findViewById(R.id.s_genero);
+        Spinner sProvincia = (Spinner) findViewById(R.id.s_provincia);
         CheckBox cbConsentimiento=findViewById(R.id.cb_consentimiento);
 
         nombre = etNombre.getText().toString();
-        apellidos = Integer.parseInt(etApellidos.getText().toString());
+        apellidos = etApellidos.getText().toString();
+        fecha = Modificar.stringToDate(etFecha.getText().toString());
+        genero = sGenero.getSelectedItem().toString();
+        provincia = sProvincia.getSelectedItem().toString();
         consentimiento = cbConsentimiento.isChecked();
 
         outState.putString("nombre", nombre);
-        outState.putInt("apellidos", apellidos);
+        outState.putString("apellidos", apellidos);
+        outState.putLong("fecha", fecha.getTime());
+        outState.putString("genero", genero);
+        outState.putString("provincia", provincia);
         outState.putBoolean("consentimiento", consentimiento);
     }
 
     public void guardar(View view){
         EditText etNombre=findViewById(R.id.et_nombre);
         EditText etApellidos=findViewById(R.id.et_apellidos);
+        if(etFecha==null) {
+            etFecha=findViewById(R.id.et_fecha);
+        }
+        Spinner sGenero=findViewById(R.id.s_genero);
+        Spinner sProvincia=findViewById(R.id.s_provincia);
         CheckBox cbConsentimiento=findViewById(R.id.cb_consentimiento);
 
         nombre = etNombre.getText().toString();
-        apellidos = Integer.parseInt(etApellidos.getText().toString());
+        apellidos = etApellidos.getText().toString();
+        fecha=stringToDate(etFecha.getText().toString());
+        genero=sGenero.getSelectedItem().toString();
+        provincia=sProvincia.getSelectedItem().toString();
         consentimiento = cbConsentimiento.isChecked();
-        Intent backIntent = new Intent();
-        backIntent.putExtra("nombre",nombre);
-        backIntent.putExtra("apellidos",apellidos);
-        backIntent.putExtra("consentimiento",consentimiento);
-        setResult(Activity.RESULT_OK, backIntent);
-        finish();
+
+        if((!(nombre.isEmpty()||apellidos.isEmpty()||fecha.toString().isEmpty()))&&consentimiento){
+            Intent backIntent = new Intent();
+            backIntent.putExtra("nombre",nombre);
+            backIntent.putExtra("apellidos",apellidos);
+            backIntent.putExtra("fecha",fecha.getTime());
+            backIntent.putExtra("genero", genero);
+            backIntent.putExtra("provincia", provincia);
+            backIntent.putExtra("consentimiento",consentimiento);
+            setResult(Activity.RESULT_OK, backIntent);
+            finish();
+        } else {
+            if (nombre.isEmpty()){
+                etNombre.setError("No puede dejar el campo vacío");
+            }
+            if (apellidos.isEmpty()){
+                etApellidos.setError("No puede dejar el campo vacío");
+            }
+        }
+    }
+
+    public static Date stringToDate(String date){
+        Date d;
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd MM yyyy");
+        if(date.isEmpty()){
+            d=new Date();
+        } else {
+            try {
+                d=dateFormatter.parse(date);
+            } catch (ParseException e){
+                e.printStackTrace();
+                d=new Date();
+            }
+        }
+        return d;
     }
 }
