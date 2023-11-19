@@ -1,0 +1,14 @@
+<application>
+  <component name="Trusted.Paths">
+    <option name="TRUSTED_PROJECT_PATHS">
+      <map>
+        <entry key="C:\Users\Juan\Documents\Clases\EjerciciosPMDM\EJ1UD3" value="true" />
+        <entry key="C:\Users\Juan\Documents\Clases\EjerciciosPMDM\EJ1UD4" value="true" />
+        <entry key="C:\Users\Juan\Documents\Clases\EjerciciosPMDM\EJ2UD3" value="true" />
+        <entry key="C:\Users\Juan\Documents\Clases\EjerciciosPMDM\EjemploActivities" value="true" />
+        <entry key="C:\Users\Juan\Documents\Clases\EjerciciosPMDM\EjemploBaseDatos\EjemploBaseDatos" value="true" />
+        <entry key="C:\Users\Juan\Documents\Clases\EjerciciosPMDM\FormularioSencillo" value="true" />
+      </map>
+    </option>
+  </component>
+</application>

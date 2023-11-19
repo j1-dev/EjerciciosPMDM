@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">EJ1UD4</string>
+    <string name="no_data">There is no data to show</string>
+    <string name="insert_name">Insert the name of the videogame</string>
+    <string name="write_here">Write here</string>
+    <string name="gender">Gender</string>
+    <string name="action">Action</string>
+    <string name="sports">Sports</string>
+    <string name="adventure">Adventure</string>
+    <string name="strategy">Strategy</string>
+    <string name="arcade">Arcade</string>
+    <string name="simulation">Simulation</string>
+    <string name="musical">Musical</string>
+    <string name="other">Otro</string>
+    <string name="has_played">Has played</string>
+    <string name="has_not_played">Has not played</string>
+    <string name="launchdate">Launchdate</string>
+    <string name="accept">Accept</string>
+    <string name="xbox">Xbox</string>
+    <string name="playstation">PlayStation</string>
+    <string name="nintendo_switch">Nintendo Switch</string>
+    <string name="multiplatform">Multi-platform</string>
+    <string name="console">Console</string>
+    <string name="error_database">There was an error while executing the query</string>
+    <string name="error_unknown">Unknown error</string>
+    <string name="delete_videogame">Delete videogame</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+</resources>

@@ -1,0 +1,206 @@
+<project version="4">
+  <component name="BookmarksManager">
+    <option name="groups">
+      <GroupState>
+        <option name="name" value="FormularioSencillo" />
+      </GroupState>
+    </option>
+  </component>
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Juan/Documents/Clases/EjerciciosPMDM/FormularioSencillo/app/src/main/res/layout/activity_main.xml" value="0.6504787961696307" />
+      </map>
+    </option>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="-1">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/formulariosencillo/MainActivity.java">
+          <provider selected="true" editor-type-id="android-source-code">
+            <state>
+              <editor-state relative-caret-position="2720">
+                <caret line="167" column="22" selection-start-line="167" selection-start-column="22" selection-end-line="167" selection-end-column="22" />
+              </editor-state>
+              <multi-preview-state selected="">
+                <representations>
+                  <list />
+                </representations>
+              </multi-preview-state>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+          <provider selected="true" editor-type-id="android-designer2" />
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTypeUsageLocalSummary">
+    <fileType name="JAVA">
+      <summary usageCount="3" lastUsed="1698171511225" />
+    </fileType>
+    <fileType name="XML">
+      <summary usageCount="3" lastUsed="1698171511259" />
+    </fileType>
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="LanguageUsageStatistics">
+    <language id="JAVA">
+      <summary usageCount="3" lastUsage="1698171511225" />
+    </language>
+    <language id="XML">
+      <summary usageCount="3" lastUsage="1698171511259" />
+    </language>
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="AndroidView" proportions="" version="1" />
+    <panes>
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="FormularioSencillo" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="FormularioSencillo" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="FormularioSencillo" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="FormularioSencillo" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="RunConfigurationStartHistory">
+    <history>
+      <element setting="Android App.app" executorId="Run" />
+    </history>
+  </component>
+  <component name="ToolWindowManager">
+    <layoutV2>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2502604" />
+      <window_info id="Commit" order="1" weight="0.25" />
+      <window_info id="Resources Explorer" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="0" />
+      <window_info anchor="bottom" id="Terminal" order="1" />
+      <window_info anchor="bottom" id="App Quality Insights" order="2" />
+      <window_info anchor="bottom" id="Problems View" order="3" />
+      <window_info anchor="bottom" id="Logcat" order="4" />
+      <window_info anchor="bottom" id="Build" order="5" />
+      <window_info anchor="right" content_ui="combo" id="Notifications" order="0" weight="0.25" />
+      <window_info anchor="right" id="Gradle" order="1" weight="0.25" />
+      <window_info anchor="right" id="Device Manager" order="2" weight="0.25" />
+      <window_info anchor="right" id="Running Devices" order="3" weight="0.25" />
+    </layoutV2>
+    <layout>
+      <window_info id="Commit" weight="0.32984102" />
+      <window_info id="Bookmarks" order="0" side_tool="true" />
+      <window_info id="Build Variants" order="1" side_tool="true" />
+      <window_info id="Structure" order="2" side_tool="true" />
+      <window_info id="Resources Explorer" order="3" />
+      <window_info content_ui="combo" id="Project" order="4" weight="0.27112675" />
+      <window_info anchor="bottom" id="Version Control" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" show_stripe_button="false" weight="0.33014113" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Android Profiler" order="4" />
+      <window_info anchor="bottom" id="Logcat" order="5" />
+      <window_info anchor="bottom" id="App Quality Insights" order="6" />
+      <window_info anchor="bottom" id="Build" order="7" />
+      <window_info anchor="bottom" id="TODO" order="8" />
+      <window_info anchor="bottom" id="Layout Inspector" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
+      <window_info anchor="bottom" id="Problems View" order="11" />
+      <window_info anchor="bottom" id="Terminal" order="12" />
+      <window_info anchor="bottom" id="Services" order="13" />
+      <window_info anchor="bottom" id="App Inspection" order="14" />
+      <window_info anchor="right" id="Layout Validation" />
+      <window_info anchor="right" id="Assistant" order="0" weight="0.32984102" />
+      <window_info anchor="right" id="Device Explorer" order="1" side_tool="true" />
+      <window_info anchor="right" id="App Links Assistant" order="2" />
+      <window_info anchor="right" id="Gradle" order="3" />
+      <window_info anchor="right" id="Device Manager" order="4" sideWeight="0.5005605" weight="0.32984102" />
+      <window_info anchor="right" id="Notifications" order="5" weight="0.25" />
+      <window_info active="true" anchor="right" id="Running Devices" order="6" sideWeight="0.49943948" side_tool="true" weight="0.32984102" />
+    </layout>
+    <recentWindows>
+      <value>Project</value>
+      <value>Run</value>
+      <value>Running Devices</value>
+      <value>Device Manager</value>
+      <value>Commit</value>
+      <value>Assistant</value>
+    </recentWindows>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1029" y="477" key="#Gradle" timestamp="1697455602056">
+      <screen x="0" y="0" width="2560" height="1392" />
+    </state>
+    <state x="1029" y="477" key="#Gradle/0.0.2560.1392/-1920.287.1920.1032@0.0.2560.1392" timestamp="1697455602056" />
+    <state x="-1132" y="621" key="FileChooserDialogImpl" timestamp="1698171528531">
+      <screen x="-1920" y="287" width="1920" height="1032" />
+    </state>
+    <state x="-1132" y="621" key="FileChooserDialogImpl/0.0.2560.1392/-1920.287.1920.1032@-1920.287.1920.1032" timestamp="1698171528531" />
+    <state x="1051" y="451" key="FileChooserDialogImpl/0.0.2560.1392/-1920.287.1920.1032@0.0.2560.1392" timestamp="1697473604293" />
+    <state width="1340" height="299" key="GridCell.Tab.0.bottom" timestamp="1697455905540">
+      <screen x="0" y="0" width="2560" height="1392" />
+    </state>
+    <state width="1340" height="299" key="GridCell.Tab.0.bottom/0.0.2560.1392/-1920.287.1920.1032@0.0.2560.1392" timestamp="1697455905540" />
+    <state width="1340" height="299" key="GridCell.Tab.0.center" timestamp="1697455905539">
+      <screen x="0" y="0" width="2560" height="1392" />
+    </state>
+    <state width="1340" height="299" key="GridCell.Tab.0.center/0.0.2560.1392/-1920.287.1920.1032@0.0.2560.1392" timestamp="1697455905539" />
+    <state width="1340" height="299" key="GridCell.Tab.0.left" timestamp="1697455905539">
+      <screen x="0" y="0" width="2560" height="1392" />
+    </state>
+    <state width="1340" height="299" key="GridCell.Tab.0.left/0.0.2560.1392/-1920.287.1920.1032@0.0.2560.1392" timestamp="1697455905539" />
+    <state width="1340" height="299" key="GridCell.Tab.0.right" timestamp="1697455905540">
+      <screen x="0" y="0" width="2560" height="1392" />
+    </state>
+    <state width="1340" height="299" key="GridCell.Tab.0.right/0.0.2560.1392/-1920.287.1920.1032@0.0.2560.1392" timestamp="1697455905540" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/formulariosencillo/MainActivity.java">
+      <provider selected="true" editor-type-id="android-source-code">
+        <state>
+          <editor-state relative-caret-position="2720">
+            <caret line="167" column="22" selection-start-line="167" selection-start-column="22" selection-end-line="167" selection-end-column="22" />
+          </editor-state>
+          <multi-preview-state selected="">
+            <representations>
+              <list />
+            </representations>
+          </multi-preview-state>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
+    </entry>
+  </component>
+</project>

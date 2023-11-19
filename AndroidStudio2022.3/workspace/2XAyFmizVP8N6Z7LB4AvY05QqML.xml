@@ -1,0 +1,310 @@
+<project version="4">
+  <component name="BookmarksManager">
+    <option name="groups">
+      <GroupState>
+        <option name="name" value="EJ2UD3" />
+      </GroupState>
+    </option>
+  </component>
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Juan/Documents/Clases/EjerciciosPMDM/EJ2UD3/app/src/main/res/layout/activity_main.xml" value="1.3679890560875514" />
+        <entry key="..\:/Users/Juan/Documents/Clases/EjerciciosPMDM/EJ2UD3/app/src/main/res/layout/activity_modificar.xml" value="0.9341637010676157" />
+      </map>
+    </option>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="-1">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+          <provider selected="true" editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ej2ud3/Modificar.java">
+          <provider selected="true" editor-type-id="android-source-code">
+            <state>
+              <editor-state relative-caret-position="40">
+                <caret line="209" column="97" selection-start-line="209" selection-start-column="97" selection-end-line="209" selection-end-column="97" />
+              </editor-state>
+              <multi-preview-state selected="">
+                <representations>
+                  <list />
+                </representations>
+              </multi-preview-state>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ej2ud3/MainActivity.java">
+          <provider selected="true" editor-type-id="android-source-code">
+            <state>
+              <editor-state relative-caret-position="676">
+                <caret line="41" column="87" selection-start-line="41" selection-start-column="87" selection-end-line="41" selection-end-column="87" />
+              </editor-state>
+              <multi-preview-state selected="">
+                <representations>
+                  <list />
+                </representations>
+              </multi-preview-state>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTypeUsageLocalSummary">
+    <fileType name="JAVA">
+      <summary usageCount="9" lastUsed="1700330834851" />
+    </fileType>
+    <fileType name="Kotlin">
+      <summary usageCount="4" lastUsed="1698173074853" />
+    </fileType>
+    <fileType name="XML">
+      <summary usageCount="12" lastUsed="1700330834679" />
+    </fileType>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>puta</find>
+    </findStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <changedPaths>
+      <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <option value="$PROJECT_DIR$/app/build.gradle.kts" />
+      <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_modificar.xml" />
+      <option value="$PROJECT_DIR$/app/src/main/java/com/example/ej2ud3/Modificar.java" />
+      <option value="$PROJECT_DIR$/app/src/main/java/com/example/ej2ud3/MainActivity.java" />
+    </changedPaths>
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="LanguageUsageStatistics">
+    <language id="JAVA">
+      <summary usageCount="9" lastUsage="1700330834851" />
+    </language>
+    <language id="XML">
+      <summary usageCount="12" lastUsage="1700330834681" />
+    </language>
+    <language id="kotlin">
+      <summary usageCount="4" lastUsage="1698173074853" />
+    </language>
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="AndroidView" proportions="" version="1" />
+    <panes>
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="EJ2UD3" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="EJ2UD3" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
+            </path>
+            <path>
+              <item name="EJ2UD3" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="EJ2UD3" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="ej2ud3" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="EJ2UD3" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="EJ2UD3" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+            <path>
+              <item name="EJ2UD3" type="1abcf292:AndroidViewProjectNode" />
+              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="ReaderModeSettings">
+    <option name="showLigatures" value="true" />
+  </component>
+  <component name="RunConfigurationStartHistory">
+    <history>
+      <element setting="Android App.app" executorId="Run" />
+    </history>
+  </component>
+  <component name="SplittingTabsState">
+    <tool-windows>
+      <tool-window id="Logcat" selected-tab="0">
+        <tabs>
+          <tab name="Logcat">
+            <content>
+              <panel>{'device':{'deviceId':'Pixel_3a_API_34_extension_level_7_x86_64','name':'Pixel 3a API 34 extension level 7 x86 64','serialNumber':'emulator-5554','isOnline':false,'release':'14','sdk':34,'model':'','isEmulator':true},'formattingConfig':{'preset':'STANDARD'},'filter':'package:mine ','isSoftWrap':false}</panel>
+            </content>
+          </tab>
+        </tabs>
+      </tool-window>
+    </tool-windows>
+  </component>
+  <component name="ToolWindowManager">
+    <layoutV2>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.080273435" />
+      <window_info id="Commit" order="1" weight="0.25" />
+      <window_info id="Resources Explorer" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="0" />
+      <window_info anchor="bottom" id="Terminal" order="1" />
+      <window_info anchor="bottom" id="App Quality Insights" order="2" />
+      <window_info anchor="bottom" id="Problems View" order="3" />
+      <window_info anchor="bottom" id="Logcat" order="4" weight="0.3301006" />
+      <window_info anchor="bottom" id="Run" order="5" show_stripe_button="false" weight="0.3301006" />
+      <window_info anchor="bottom" id="Build" order="6" weight="0.3301006" />
+      <window_info anchor="right" id="Layout Validation" show_stripe_button="false" />
+      <window_info anchor="right" content_ui="combo" id="Notifications" order="0" weight="0.25" />
+      <window_info anchor="right" id="Gradle" order="1" weight="0.25" />
+      <window_info anchor="right" id="Device Manager" order="2" weight="0.25" />
+      <window_info anchor="right" id="Running Devices" order="3" weight="0.25019532" />
+    </layoutV2>
+    <layout>
+      <window_info id="Bookmarks" order="0" side_tool="true" />
+      <window_info id="Build Variants" order="1" side_tool="true" />
+      <window_info id="Structure" order="2" side_tool="true" />
+      <window_info id="Resources Explorer" order="3" />
+      <window_info active="true" content_ui="combo" id="Project" order="4" visible="true" weight="0.10175781" />
+      <window_info anchor="bottom" id="Version Control" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Android Profiler" order="4" />
+      <window_info anchor="bottom" id="Logcat" order="5" />
+      <window_info anchor="bottom" id="App Quality Insights" order="6" />
+      <window_info anchor="bottom" id="Build" order="7" />
+      <window_info anchor="bottom" id="TODO" order="8" />
+      <window_info anchor="bottom" id="Layout Inspector" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
+      <window_info anchor="bottom" id="Problems View" order="11" />
+      <window_info anchor="bottom" id="Terminal" order="12" />
+      <window_info anchor="bottom" id="Services" order="13" />
+      <window_info anchor="bottom" id="App Inspection" order="14" />
+      <window_info anchor="right" id="Device Explorer" order="0" side_tool="true" />
+      <window_info anchor="right" id="App Links Assistant" order="1" />
+      <window_info anchor="right" id="Gradle" order="2" />
+      <window_info anchor="right" id="Device Manager" order="3" />
+      <window_info anchor="right" id="Notifications" order="4" weight="0.25" />
+      <window_info anchor="right" id="Running Devices" order="5" side_tool="true" />
+    </layout>
+    <recentWindows>
+      <value>Project</value>
+      <value>Run</value>
+      <value>Running Devices</value>
+      <value>Logcat</value>
+      <value>Build</value>
+    </recentWindows>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1060" y="451" key="FileChooserDialogImpl" timestamp="1700331299850">
+      <screen x="0" y="0" width="2560" height="1392" />
+    </state>
+    <state x="1060" y="451" key="FileChooserDialogImpl/0.0.2560.1392/-1920.287.1920.1032@0.0.2560.1392" timestamp="1700331299850" />
+    <state width="2478" height="417" key="GridCell.Tab.0.bottom" timestamp="1698173052501">
+      <screen x="0" y="0" width="2560" height="1392" />
+    </state>
+    <state width="2478" height="417" key="GridCell.Tab.0.bottom/0.0.2560.1392/-1920.287.1920.1032@0.0.2560.1392" timestamp="1698173052501" />
+    <state width="2478" height="417" key="GridCell.Tab.0.center" timestamp="1698173052501">
+      <screen x="0" y="0" width="2560" height="1392" />
+    </state>
+    <state width="2478" height="417" key="GridCell.Tab.0.center/0.0.2560.1392/-1920.287.1920.1032@0.0.2560.1392" timestamp="1698173052501" />
+    <state width="2478" height="417" key="GridCell.Tab.0.left" timestamp="1698173052501">
+      <screen x="0" y="0" width="2560" height="1392" />
+    </state>
+    <state width="2478" height="417" key="GridCell.Tab.0.left/0.0.2560.1392/-1920.287.1920.1032@0.0.2560.1392" timestamp="1698173052501" />
+    <state width="2478" height="417" key="GridCell.Tab.0.right" timestamp="1698173052501">
+      <screen x="0" y="0" width="2560" height="1392" />
+    </state>
+    <state width="2478" height="417" key="GridCell.Tab.0.right/0.0.2560.1392/-1920.287.1920.1032@0.0.2560.1392" timestamp="1698173052501" />
+    <state x="781" y="328" key="SettingsEditor" timestamp="1700331099980">
+      <screen x="0" y="0" width="2560" height="1392" />
+    </state>
+    <state x="781" y="328" key="SettingsEditor/0.0.2560.1392/-1920.287.1920.1032@0.0.2560.1392" timestamp="1700331099980" />
+    <state x="1010" y="395" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1698170443552">
+      <screen x="0" y="0" width="2560" height="1392" />
+    </state>
+    <state x="1010" y="395" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.2560.1392/-1920.287.1920.1032@0.0.2560.1392" timestamp="1698170443552" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/build.gradle.kts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle.kts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="6" column="19" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_modificar.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ej2ud3/Modificar.java">
+      <provider selected="true" editor-type-id="android-source-code">
+        <state>
+          <editor-state relative-caret-position="40">
+            <caret line="209" column="97" selection-start-line="209" selection-start-column="97" selection-end-line="209" selection-end-column="97" />
+          </editor-state>
+          <multi-preview-state selected="">
+            <representations>
+              <list />
+            </representations>
+          </multi-preview-state>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ej2ud3/MainActivity.java">
+      <provider selected="true" editor-type-id="android-source-code">
+        <state>
+          <editor-state relative-caret-position="676">
+            <caret line="41" column="87" selection-start-line="41" selection-start-column="87" selection-end-line="41" selection-end-column="87" />
+          </editor-state>
+          <multi-preview-state selected="">
+            <representations>
+              <list />
+            </representations>
+          </multi-preview-state>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

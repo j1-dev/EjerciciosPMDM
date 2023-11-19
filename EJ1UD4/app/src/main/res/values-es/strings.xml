@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EJ1UD4</string>
+    <string name="no_data">No hay datos que mostrar</string>
+    <string name="insert_name">Introduce el nombre del videojuego</string>
+    <string name="write_here">Escribe aquí</string>
+    <string name="gender">Genero</string>
+    <string name="action">Acción</string>
+    <string name="sports">Deportes</string>
+    <string name="adventure">Aventura</string>
+    <string name="strategy">Estrategia</string>
+    <string name="arcade">Arcade</string>
+    <string name="simulation">Simulación</string>
+    <string name="musical">Musical</string>
+    <string name="other">Otro</string>
+    <string name="has_played">Ha jugado</string>
+    <string name="has_not_played">No ha jugado</string>
+    <string name="launchdate">Fecha de salida</string>
+    <string name="accept">Aceptar</string>
+    <string name="xbox">Xbox</string>
+    <string name="playstation">PlayStation</string>
+    <string name="nintendo_switch">Nintendo Switch</string>
+    <string name="multiplatform">Multi-platforma</string>
+    <string name="console">Consola</string>
+    <string name="error_database">Hubo un error mientras se ejecutaba la consulta</string>
+    <string name="error_unknown">Error desconocido</string>
+    <string name="delete_videogame">Eliminar videojuego</string>
+    <string name="are_you_sure">¿Estás seguro?</string>
+    <string name="yes">Sí</string>
+    <string name="no">No</string>
+</resources>

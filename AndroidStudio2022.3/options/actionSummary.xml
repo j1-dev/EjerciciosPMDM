@@ -1,0 +1,307 @@
+<application>
+  <component name="ActionsLocalSummary">
+    <e n="$SelectAll">
+      <i c="28" l="1700392202153" />
+    </e>
+    <e n="$Undo">
+      <i c="161" l="1700396294633" />
+    </e>
+    <e n="Android.MakeGradleModule">
+      <i c="1" l="1698169784987" />
+    </e>
+    <e n="CommentByLineComment">
+      <i c="23" l="1698171977662" />
+    </e>
+    <e n="EditorBackSpace">
+      <i c="1309" l="1700397045007" />
+    </e>
+    <e n="EditorChooseLookupItem">
+      <i c="354" l="1700396500370" />
+    </e>
+    <e n="EditorCopy">
+      <i c="215" l="1700396634838" />
+    </e>
+    <e n="EditorCut">
+      <i c="94" l="1700396293974" />
+    </e>
+    <e n="EditorDelete">
+      <i c="59" l="1700395979058" />
+    </e>
+    <e n="EditorDeleteLine">
+      <i c="1" l="1700389769425" />
+    </e>
+    <e n="EditorDeleteToWordEnd">
+      <i c="98" l="1700392151554" />
+    </e>
+    <e n="EditorDeleteToWordStart">
+      <i c="123" l="1700396405272" />
+    </e>
+    <e n="EditorDown">
+      <i c="376" l="1700396726919" />
+    </e>
+    <e n="EditorDownWithSelection">
+      <i c="8" l="1698170432973" />
+    </e>
+    <e n="EditorDuplicate">
+      <i c="10" l="1698172006563" />
+    </e>
+    <e n="EditorEnter">
+      <i c="280" l="1700396279727" />
+    </e>
+    <e n="EditorEscape">
+      <i c="6" l="1700392120924" />
+    </e>
+    <e n="EditorLeft">
+      <i c="342" l="1700396281795" />
+    </e>
+    <e n="EditorLeftWithSelection">
+      <i c="18" l="1700389186767" />
+    </e>
+    <e n="EditorLineStart">
+      <i c="2" l="1698171993066" />
+    </e>
+    <e n="EditorLookupUp">
+      <i c="1" l="1698171158215" />
+    </e>
+    <e n="EditorNextWord">
+      <i c="365" l="1700395980380" />
+    </e>
+    <e n="EditorNextWordWithSelection">
+      <i c="45" l="1698171166580" />
+    </e>
+    <e n="EditorPaste">
+      <i c="351" l="1700396642224" />
+    </e>
+    <e n="EditorPreviousWord">
+      <i c="265" l="1700395980715" />
+    </e>
+    <e n="EditorPreviousWordWithSelection">
+      <i c="100" l="1700395074629" />
+    </e>
+    <e n="EditorRight">
+      <i c="567" l="1700396279016" />
+    </e>
+    <e n="EditorRightWithSelection">
+      <i c="6" l="1698170929217" />
+    </e>
+    <e n="EditorScrollDown">
+      <i c="1" l="1700390493544" />
+    </e>
+    <e n="EditorScrollUp">
+      <i c="5" l="1698170435862" />
+    </e>
+    <e n="EditorSplitLine">
+      <i c="1" l="1697473024254" />
+    </e>
+    <e n="EditorTab">
+      <i c="22" l="1700390608867" />
+    </e>
+    <e n="EditorUp">
+      <i c="144" l="1700392348449" />
+    </e>
+    <e n="EditorUpWithSelection">
+      <i c="2" l="1697470311818" />
+    </e>
+    <e n="ExpandRegion">
+      <i c="1" l="1700336802510" />
+    </e>
+    <e n="FileChooser.NewFolder">
+      <i c="1" l="1700333446190" />
+    </e>
+    <e n="FileChooser.Refresh">
+      <i c="3" l="1698083943018" />
+    </e>
+    <e n="Find">
+      <i c="13" l="1700396495397" />
+    </e>
+    <e n="Generate">
+      <i c="2" l="1700336473822" />
+    </e>
+    <e n="GenerateConstructor">
+      <i c="1" l="1700336462839" />
+    </e>
+    <e n="GenerateGetterAndSetter">
+      <i c="1" l="1700336474902" />
+    </e>
+    <e n="GoogleLogin.LoginService">
+      <i c="6" l="1700334140438" />
+    </e>
+    <e n="GotoDeclaration">
+      <i c="11" l="1700395893155" />
+    </e>
+    <e n="JumpToLastChange">
+      <i c="2" l="1698171143657" />
+    </e>
+    <e n="MethodDown">
+      <i c="6" l="1698168045176" />
+    </e>
+    <e n="MethodUp">
+      <i c="6" l="1698172193207" />
+    </e>
+    <e n="MoreRunToolbarActions">
+      <i c="2" l="1700393172215" />
+    </e>
+    <e n="MoveStatementDown">
+      <i c="4" l="1698171309216" />
+    </e>
+    <e n="MoveStatementUp">
+      <i c="12" l="1698172865172" />
+    </e>
+    <e n="NewClass">
+      <i c="5" l="1700387991640" />
+    </e>
+    <e n="NewDir">
+      <i c="3" l="1700333741410" />
+    </e>
+    <e n="NewProject">
+      <i c="1" l="1700333386771" />
+    </e>
+    <e n="OpenFile">
+      <i c="11" l="1700331291770" />
+    </e>
+    <e n="PasteMultiple">
+      <i c="2" l="1700336954634" />
+    </e>
+    <e n="RecentFiles">
+      <i c="1" l="1700390513263" />
+    </e>
+    <e n="RedesignedRunConfigurationSelector">
+      <i c="8" l="1700394558780" />
+    </e>
+    <e n="Run">
+      <i c="58" l="1700396980268" />
+    </e>
+    <e n="RunAnything">
+      <i c="1" l="1697470541746" />
+    </e>
+    <e n="SaveAll">
+      <i c="366" l="1700397045612" />
+    </e>
+    <e n="SettingsEntryPoint">
+      <i c="3" l="1700334141007" />
+    </e>
+    <e n="ShowIntentionActions">
+      <i c="10" l="1700390475732" />
+    </e>
+    <e n="ShowSettings">
+      <i c="7" l="1700334144208" />
+    </e>
+    <e n="Stop">
+      <i c="8" l="1697473743307" />
+    </e>
+    <e n="StopWithDropDown">
+      <i c="9" l="1700396208357" />
+    </e>
+    <e n="ToggleLineBreakpoint">
+      <i c="1" l="1700336564832" />
+    </e>
+    <e n="WelcomeScreen.OpenProject">
+      <i c="1" l="1697455566014" />
+    </e>
+    <e n="android.device.power.button">
+      <i c="7" l="1700394154469" />
+    </e>
+    <e n="android.device.rotate.right">
+      <i c="4" l="1698172584790" />
+    </e>
+    <e n="android.device.volume.down.button">
+      <i c="6" l="1700394156676" />
+    </e>
+    <e n="android.device.volume.up.button">
+      <i c="3" l="1700394155452" />
+    </e>
+    <e n="android.emulator.extended.controls">
+      <i c="6" l="1700394056816" />
+    </e>
+    <e n="com.android.tools.adtui.workbench.AttachedToolWindow$HideAction">
+      <i c="1" l="1700396210940" />
+    </e>
+    <e n="com.android.tools.idea.gradle.project.build.invoker.GradleBuildInvokerImpl$RestartAction">
+      <i c="1" l="1698168917340" />
+    </e>
+    <e n="com.android.tools.idea.run.deployment.SelectDeviceAction">
+      <i c="1" l="1698169096752" />
+    </e>
+    <e n="com.intellij.application.options.schemes.AbstractSchemeActions$ExportAction">
+      <i c="1" l="1700334157714" />
+    </e>
+    <e n="com.intellij.application.options.schemes.AbstractSchemesPanel$ShowSchemesActionsListAction">
+      <i c="2" l="1700334149462" />
+    </e>
+    <e n="com.intellij.codeInsight.daemon.NavigateAction">
+      <i c="1" l="1700395592048" />
+    </e>
+    <e n="com.intellij.codeInsight.daemon.impl.DaemonTooltipWithActionRenderer$SettingsActionGroup">
+      <i c="2" l="1697472912282" />
+    </e>
+    <e n="com.intellij.execution.actions.RunConfigurationsComboBoxAction$SelectConfigAction$2">
+      <i c="2" l="1700394241300" />
+    </e>
+    <e n="com.intellij.execution.ui.AllRunConfigurationsToggle">
+      <i c="5" l="1700394277823" />
+    </e>
+    <e n="com.intellij.execution.ui.SelectRunConfigurationWithInlineActions">
+      <i c="1" l="1700394233907" />
+    </e>
+    <e n="com.intellij.find.SearchReplaceComponent$CloseAction">
+      <i c="2" l="1698172833361" />
+    </e>
+    <e n="com.intellij.find.editorHeaderActions.NextOccurrenceAction">
+      <i c="3" l="1700395154138" />
+    </e>
+    <e n="com.intellij.ide.ReopenProjectAction">
+      <i c="6" l="1700394772183" />
+    </e>
+    <e n="com.intellij.ide.actions.CollapseAllAction">
+      <i c="1" l="1700333493383" />
+    </e>
+    <e n="com.intellij.ide.actions.runAnything.ui.RunAnythingScrollingUtil$1">
+      <i c="1" l="1697470542285" />
+    </e>
+    <e n="com.intellij.openapi.actionSystem.DefaultActionGroup">
+      <i c="3" l="1700394851030" />
+    </e>
+    <e n="com.intellij.openapi.fileEditor.TextEditorWithPreview$SingleChangeViewModeAction">
+      <i c="45" l="1700396212380" />
+    </e>
+    <e n="com.intellij.openapi.project.DumbAwareAction$SimpleDumbAwareAction">
+      <i c="1" l="1697470542877" />
+    </e>
+    <e n="com.intellij.openapi.project.LightEditActionFactory$SimpleLightEditCompatibleAction">
+      <i c="1" l="1700390513868" />
+    </e>
+    <e n="com.intellij.openapi.ui.DialogWrapper$4">
+      <i c="2" l="1700333753761" />
+    </e>
+    <e n="com.intellij.openapi.updateSettings.impl.UpdateSettingsEntryPointActionProvider$IdeUpdateAction">
+      <i c="1" l="1700334089715" />
+    </e>
+    <e n="com.intellij.openapi.wm.impl.SquareAnActionButton">
+      <i c="49" l="1700396521328" />
+    </e>
+    <e n="com.intellij.openapi.wm.impl.customFrameDecorations.header.toolbar.MainMenuButton$ShowMenuAction">
+      <i c="23" l="1700394766426" />
+    </e>
+    <e n="com.intellij.toolWindow.MoreSquareStripeButton$Companion$createAction$1">
+      <i c="1" l="1700330955823" />
+    </e>
+    <e n="com.intellij.toolWindow.ToolWindowHeader$HideAction">
+      <i c="9" l="1700333505002" />
+    </e>
+    <e n="com.intellij.ui.CommonActionsPanel$AddButton">
+      <i c="1" l="1700394281111" />
+    </e>
+    <e n="com.intellij.xdebugger.impl.breakpoints.RemoveBreakpointGutterIconAction">
+      <i c="1" l="1700331949414" />
+    </e>
+    <e n="editRunConfigurations">
+      <i c="2" l="1700394560925" />
+    </e>
+    <e n="org.jetbrains.android.actions.CreateMultiRootResourceFileAction">
+      <i c="3" l="1700389246764" />
+    </e>
+    <e n="org.jetbrains.android.actions.CreateTypedResourceFileAction">
+      <i c="1" l="1700387339157" />
+    </e>
+  </component>
+</application>
