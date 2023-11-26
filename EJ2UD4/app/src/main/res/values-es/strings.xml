@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="no_data">No hay datos que mostrar</string>
+    <string name="insert_name">Introduce tu nombre</string>
+    <string name="write_here">Escribe aquí</string>
+    <string name="man">Hombre</string>
+    <string name="woman">Mujer</string>
+    <string name="other">Otro</string>
+    <string name="data_consent">Consiento el uso datos con fines comerciales</string>
+    <string name="birthdate">Fecha de nacimiento</string>
+    <string name="accept">Aceptar</string>
+    <string name="secondary_education">Educación secundaria obligatoria</string>
+    <string name="baccalaureate">Bachillerato o ciclo formativo de grado medio</string>
+    <string name="grado">Estudios de grado o ciclo formativo de grado superior</string>
+    <string name="postgrado">Estudios de postgrado</string>
+    <string name="nivel_estudios">Nivel de estudios</string>
+    <string name="insert_surname">Introduce tus apellidos</string>
+    <string name="insert_dni">Introduce tu documento nacional de identidad</string>
+    <string name="error_database">Hubo un error mientras se ejecutaba la consulta</string>
+    <string name="error_unknown">Error desconocido</string>
+    <string name="eliminar_alumno">Eliminar alumno</string>
+    <string name="are_you_sure">¿Estás seguro?</string>
+    <string name="yes">Sí</string>
+    <string name="no">No</string>
+    <string name="insert_book_name">Introduce el nombre del libro</string>
+</resources>

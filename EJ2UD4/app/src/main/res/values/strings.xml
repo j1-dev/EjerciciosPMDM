@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">EjemploBaseDatos</string>
+    <string name="no_data">There is no data to show</string>
+    <string name="insert_name">Insert your name</string>
+    <string name="write_here">Write here</string>
+    <string name="man">Man</string>
+    <string name="woman">Woman</string>
+    <string name="other">Other</string>
+    <string name="data_consent">I accept the use of my data for marketing use</string>
+    <string name="birthdate">Birthdate</string>
+    <string name="accept">Accept</string>
+    <string name="secondary_education">Compulsory secondary education</string>
+    <string name="baccalaureate">Baccalaureate or intermediate level training cycle</string>
+    <string name="grado">Degree studies or higher degree training cycle</string>
+    <string name="postgrado">Postgrads studies</string>
+    <string name="nivel_estudios">Studies level</string>
+    <string name="insert_surname">Insert your surname</string>
+    <string name="insert_dni">Insert your national identification number</string>
+    <string name="error_database">There was an error while executing the query</string>
+    <string name="error_unknown">Unknown error</string>
+    <string name="eliminar_alumno">Delete pupil</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="insert_book_name">Insert the name of the book</string>
+</resources>
