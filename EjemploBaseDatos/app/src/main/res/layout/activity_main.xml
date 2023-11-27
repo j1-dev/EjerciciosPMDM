@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/tv_no_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_data"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
+
+    <ListView
+        android:id="@+id/lv_alumnos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:descendantFocusability="beforeDescendants"
+        android:visibility="gone"></ListView>
+
+    <Button
+        android:id="@+id/fab_nuevo_alumno"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="40dp"
+        android:elevation="0dp"
+        android:onClick="irNuevoAlumno"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_add_white"
+        app:backgroundTint="@color/molon"
+        app:borderWidth="0dp"
+        app:elevation="0dp"
+        app:fabCustomSize="80dp"
+        app:maxImageSize="80dp" />
+
+</RelativeLayout>
