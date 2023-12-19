@@ -73,8 +73,8 @@ public class Alumno {
     } else {
       this.apellidos = "";
     }
-    if (!jsonObject.isNull("fechaNacimientoString")) {
-      String sFecha = jsonObject.getString("fechaNacimientoString");
+    if (!jsonObject.isNull("fechaNacimiento")) {
+      String sFecha = jsonObject.getString("fechaNacimiento");
       if (!sFecha.isEmpty()) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         this.fechaNacimiento = sdf.parse(sFecha);

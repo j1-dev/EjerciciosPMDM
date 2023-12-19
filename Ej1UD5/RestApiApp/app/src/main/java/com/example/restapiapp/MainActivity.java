@@ -158,9 +158,9 @@ public class MainActivity extends AppCompatActivity implements AlumnosAdapter.Al
         alumnos.clear();
       }
       for (int i = 0; i < listaAlumnos.length(); ++i) {
-        JSONObject jsonUser = listaAlumnos.getJSONObject(i);
+        JSONObject jsonObject = listaAlumnos.getJSONObject(i);
         Alumno alumno = new Alumno();
-        alumno.fromJSON(jsonUser);
+        alumno.fromJSON(jsonObject);
         alumnos.add(alumno);
       }
 
@@ -179,10 +179,10 @@ public class MainActivity extends AppCompatActivity implements AlumnosAdapter.Al
   }
 
 
-//  @Override
-//  public void verLibrosPressed(int position) {
-//    Intent myIntent = new Intent().setClass(this, AlumnoActivity.class);
-//    myIntent.putExtra("position", position);
-//    nuevoResultLauncher.launch(myIntent);
-//  }
+  @Override
+  public void verLibrosPressed(int position) {
+    Intent myIntent = new Intent().setClass(this, AlumnoActivity.class);
+    myIntent.putExtra("position", position);
+    nuevoResultLauncher.launch(myIntent);
+  }
 }

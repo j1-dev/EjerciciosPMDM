@@ -9,15 +9,15 @@
         android:text="Gerardo Elias López de Uralde"
         android:layout_margin="10dp"/>
 
-<!--    <Button-->
-<!--        android:id="@+id/bt_ver_libros"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentRight="true"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:layout_marginRight="10dp"-->
-<!--        android:text="Ver libros"-->
-<!--        android:onClick="verLibros"/>-->
+    <Button
+        android:id="@+id/bt_ver_libros"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Ver libros"
+        android:onClick="verLibros"/>
 
     <TextView
         android:id="@+id/tv_li_fecha_nacimiento"

@@ -29,7 +29,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:descendantFocusability="beforeDescendants"
-        android:visibility="gone"
         android:paddingTop="70dp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -67,5 +66,10 @@
         app:elevation="0dp"
         android:onClick="back"
         app:backgroundTint="@color/back"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pb_main"/>
 
 </RelativeLayout>

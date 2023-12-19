@@ -22,8 +22,9 @@ public class Alumno {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = true, columnDefinition = "date")
     private Date fechaNacimiento;
-    @JsonBackReference
+
     @OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL)
+    @JsonBackReference
     private Set<Libro> libros= new HashSet<>();
 
     public Alumno() {
@@ -61,17 +62,6 @@ public class Alumno {
 
     public Date getFechaNacimiento() {
         return fechaNacimiento;
-    }
-
-    @JsonInclude
-    public String getFechaNacimientoString(){
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-        if(fechaNacimiento==null){
-            return "";
-        }
-        else {
-            return sdf.format(fechaNacimiento);
-        }
     }
 
     public void setFechaNacimiento(Date fechaNacimiento) {

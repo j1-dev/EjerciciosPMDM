@@ -33,9 +33,8 @@ public class Internetop {
     return me;
   }
 
-  public String postText(String urlo, List<Parametro> params){//Usaremos POST para insertar nueva información
-    int cont=0;/*Como puede haber muchos errores a la hora de realizar la conexión a Internet, conviene
-        intentar establecer la conexión al menos un par de veces*/
+  public String postText(String urlo, List<Parametro> params){
+    int cont=0;
     String res=okPostText(urlo, params);
     while((cont<5)&&(res.equals("error.PIPE"))){
       ++cont;
@@ -46,26 +45,26 @@ public class Internetop {
 
   private String okPostText(String urlo, List<Parametro> params){
     try {
-      OkHttpClient client = new OkHttpClient();//Creamos el cliente OKHttp
-      JSONObject jsonObject=new JSONObject();/*La información será enviada en formato JSON por lo que
-            la lista de parámetros que el método tiene como argumento se transforma en objetos JSON*/
+      OkHttpClient client = new OkHttpClient();
+      JSONObject jsonObject=new JSONObject();
       for (Parametro pair : params) {
         jsonObject.put(pair.getLlave(),pair.getValor());
       }
       RequestBody body = RequestBody.create(jsonObject.toString(),
-          MediaType.parse("application/json"));//Creamos un requestBody de tipo JSON
+          MediaType.parse("application/json"));
+      System.out.println(jsonObject.toString());
+
       Request request = new Request.Builder()
           .url(urlo)
           .post(body)
-          .build();/*Construimos el requestBody con la url y la información en formato JSON que
-                    queremos enviar*/
-      Response response = client.newCall(request).execute();//Ejecutamos la conexión con nuestro request
-      if (!response.isSuccessful()) {//Si la conexión ha tenido problemas enviamos un error de vuelta
+          .build();
+      Response response = client.newCall(request).execute();
+      if (!response.isSuccessful()) {
         return "error.OKHttp";
-      } else {//En caso contrario enviamos la información devuelta en el cuerpo de la petición
+      } else {
         return response.body().string();
       }
-    } catch (IOException e) {//Manejo de otras posibles excepciones
+    } catch (IOException e) {
       e.printStackTrace();
       return "error.PIPE";
     } catch (JSONException e) {

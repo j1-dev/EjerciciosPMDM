@@ -105,14 +105,9 @@ public class NuevoAlumno extends AppCompatActivity {
   }
 
   private Boolean isNetworkAvailable() {
-    /*La clase ConnectivityManager nos devolverá información sobre el estado de la conexión a
-     * Internet. Puede ser que no tengamos cobertura o que directamente no tengamos activado
-     * la red WiFi o la red de datos móviles*/
     ConnectivityManager connectivityManager = (ConnectivityManager)
         getSystemService(Context.CONNECTIVITY_SERVICE);
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-      /*Si la versión de Android es superior a Android M, debemos usar las clase Network
-       * en lugar de NetworkInfo para comprobar la conectividad*/
       Network nw = connectivityManager.getActiveNetwork();
       if (nw == null) {
         return false;
@@ -179,15 +174,11 @@ public class NuevoAlumno extends AppCompatActivity {
   }
 
   private void sendTask(String url, String nombre, String apellidos, String fecha) {
-    //La clase Executor será la encargada de lanzar un nuevo hilo en background con la tarea
     ExecutorService executor = Executors.newSingleThreadExecutor();
-    //Handler es la clase encargada de manejar el resultado de la tarea ejecutada en segundo plano
     Handler handler = new Handler(Looper.getMainLooper());
-    executor.execute(new Runnable() {//Ejecutamos el nuevo hilo
+    executor.execute(new Runnable() {
       @Override
       public void run() {
-        /*Aquí ejecutamos el código en segundo plano, que consiste en obtener del servidor
-         * la lista de usuarios*/
         Internetop interopera=Internetop.getInstance();
         List<Parametro> params = new ArrayList<>();
         params.add(new Parametro("nombre", nombre));
@@ -195,9 +186,7 @@ public class NuevoAlumno extends AppCompatActivity {
         params.add(new Parametro("fechaNacimiento", fecha));
         System.out.println(fecha);
         String result = interopera.postText(url,params);
-        handler.post(new Runnable() {/*Una vez handler recoge el resultado de la tarea en
-                segundo plano, hacemos los cambios pertinentes en la interfaz de usuario en función
-                del resultado obtenido*/
+        handler.post(new Runnable() {
           @Override
           public void run() {
             Button btAceptar= findViewById(R.id.bt_nuevo_accept);//Volvemos a activar el botón aceptar
@@ -206,16 +195,16 @@ public class NuevoAlumno extends AppCompatActivity {
             btAceptar.setEnabled(true);
             btAceptar.setClickable(true);
             long idCreado;
-            try{//Recuperamos desde el resultado el nuevo ID del objeto que se ha creado
+            try{
               idCreado=Long.parseLong(result);
-            }catch(NumberFormatException ex){//Manejo de posible excepción
+            }catch(NumberFormatException ex){
               idCreado=-1;
             }
-            if(idCreado>0){//El ID devuelto debe ser mayor que 0 para que el resultado sea correcto
+            if(idCreado>0){
               setResult(RESULT_OK);
               finish();
             }
-            else {//En caso contrario mostramos el error correspondiente
+            else {
               showError("error.desconocido");
             }
           }
