@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".AlumnoActivity">
 
     <TextView
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Alumnos"
+        android:text="Libros"
         android:textSize="40dp"
         android:fontWeight="700"
         android:layout_margin="10dp"/>
 
     <TextView
-        android:id="@+id/tv_no_data"
+        android:id="@+id/tv_empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="no hay datos"
@@ -25,13 +25,15 @@
         />
 
     <ListView
-        android:id="@+id/lv_alumnos"
+        android:id="@+id/lv_libros"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:descendantFocusability="beforeDescendants"
+        android:visibility="gone"
         android:paddingTop="70dp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_nuevo_alumno"
+        android:id="@+id/fab_nuevo_libro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -45,12 +47,25 @@
         app:borderWidth="0dp"
         android:elevation="0dp"
         app:elevation="0dp"
-        android:onClick="irNuevoAlumno"
+        android:onClick="irNuevoLibro"
         app:backgroundTint="@color/molon"/>
 
-    <ProgressBar
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/pb_main"/>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:scaleType="fitXY"
+        android:padding="0dp"
+        app:fabCustomSize="80dp"
+        android:layout_margin="40dp"
+        android:src="@drawable/ic_back_white"
+        app:maxImageSize="80dp"
+        app:borderWidth="0dp"
+        android:elevation="0dp"
+        app:elevation="0dp"
+        android:onClick="back"
+        app:backgroundTint="@color/back"/>
 
 </RelativeLayout>

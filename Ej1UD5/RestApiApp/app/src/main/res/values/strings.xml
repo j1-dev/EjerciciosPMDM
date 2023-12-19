@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">RestApiApp</string>
-    <string name="main_url">http://10.0.2.2:8080/userapi/</string>
+    <string name="alumno_url">http://10.0.2.2:8080/alumnoapi/</string>
+    <string name="libro_url">http://10.0.2.2:8080/libroapi/</string>
     <string name="no_results">No results</string>
     <string name="error_connection">Connection error</string>
     <string name="error_undelivered">The message could not be sent</string>

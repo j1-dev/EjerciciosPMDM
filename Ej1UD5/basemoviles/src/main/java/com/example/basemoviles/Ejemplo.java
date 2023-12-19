@@ -16,6 +16,7 @@ public class Ejemplo {
     }
 
     public void pruebaInsercion(LibroRepositorio repositorioLibro, AlumnoRepositorio repositorioAlumno){
+      /*
         Libro libro = new Libro();
         libro.setNombre("jeff");
         Optional<Alumno> a = repositorioAlumno.findById(3L);
@@ -23,6 +24,8 @@ public class Ejemplo {
         libro.setAlumno(b);
         repositorioLibro.save(libro);
         System.out.println(repositorioLibro.findAll());
+       */
+
     }
 
 }

@@ -20,8 +20,7 @@ public class Alumno {
     private String nombre;
     private String apellidos;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Column(nullable = true)
-    @JsonIgnore
+    @Column(nullable = true, columnDefinition = "date")
     private Date fechaNacimiento;
     @JsonBackReference
     @OneToMany(mappedBy = "alumno", cascade = CascadeType.ALL)
@@ -86,4 +85,15 @@ public class Alumno {
     public void setLibros(Set<Libro> libros) {
         this.libros = libros;
     }
+
+  @Override
+  public String toString() {
+    return "Alumno{" +
+        "idAlumno=" + idAlumno +
+        ", nombre='" + nombre + '\'' +
+        ", apellidos='" + apellidos + '\'' +
+        ", fechaNacimiento=" + fechaNacimiento +
+        ", libros=" + libros +
+        '}';
+  }
 }

@@ -50,6 +50,7 @@ public class AlumnoController {
             throws URISyntaxException {
         //Hacemos un save usando el repositorio para guardar el nuevo usuario, que nos devolverá el usuario creado
         Alumno alumnoCreado = alumnoRepositorio.save(alumno);
+        System.out.println(alumno.toString());
         if (alumnoCreado == null) {/*Si el usuario creado es nulo es porque ha habido un error y lo indicaremos en
         la respuesta que enviaremos al cliente con un "not found" en el cuerpo*/
             return ResponseEntity.notFound().build();

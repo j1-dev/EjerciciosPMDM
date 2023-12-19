@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">RestApiApp</string>
-    <string name="main_url">http://10.0.2.2:8080/userapi/</string>
+    <string name="alumno_url">http://10.0.2.2:8080/alumnoapi/</string>
+    <string name="libro_url">http://10.0.2.2:8080/libroapi/</string>
     <string name="no_results">Sin resultados</string>
     <string name="error_connection">Error de conexión</string>
     <string name="error_unknown">Error desconocido</string>
