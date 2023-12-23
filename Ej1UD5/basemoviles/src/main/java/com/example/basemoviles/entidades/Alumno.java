@@ -75,15 +75,4 @@ public class Alumno {
     public void setLibros(Set<Libro> libros) {
         this.libros = libros;
     }
-
-  @Override
-  public String toString() {
-    return "Alumno{" +
-        "idAlumno=" + idAlumno +
-        ", nombre='" + nombre + '\'' +
-        ", apellidos='" + apellidos + '\'' +
-        ", fechaNacimiento=" + fechaNacimiento +
-        ", libros=" + libros +
-        '}';
-  }
 }

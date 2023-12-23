@@ -32,6 +32,7 @@ import java.util.concurrent.Executors;
 
 public class NuevoLibro extends AppCompatActivity {
   private int position;
+  private int idAlumno;
   private DBHelper dbHelper;
 
   @Override
@@ -41,10 +42,12 @@ public class NuevoLibro extends AppCompatActivity {
     if(savedInstanceState!=null){/*Si hemos hecho onSaveInstanceState previamente y hemos almacenado información,
         la recuperamos*/
       position = savedInstanceState.getInt("position",-1);
+      idAlumno = savedInstanceState.getInt("idAlumno", -1);
     }
     else{//Si es la primera vez que se crea la actividad, obtenemos la información que pasamos a través del Intent
       Intent intent = getIntent();
       position = intent.getIntExtra("position", -1);
+      idAlumno = intent.getIntExtra("idAlumno", -1);
     }
   }
 
@@ -83,7 +86,7 @@ public class NuevoLibro extends AppCompatActivity {
     Resources res = getResources();
     Libro libro = new Libro();
     libro.setNombre(nombre);
-    libro.setIdAlumno(position+1);
+    libro.setIdAlumno(idAlumno);
     if (isNetworkAvailable()) {
       String url = res.getString(R.string.libro_url) + "nuevoLibro";
       sendTask(url, libro);
@@ -103,6 +106,8 @@ public class NuevoLibro extends AppCompatActivity {
         params.add(new Parametro("nombre", libro.getNombre()));
         params.add(new Parametro("idAlumno", libro.getIdAlumno()+""));
         String result = interopera.postText(url,params);
+        System.out.println(url);
+        System.out.println(libro.getNombre() + "-" + libro.getIdAlumno());
         handler.post(new Runnable() {
           @Override
           public void run() {

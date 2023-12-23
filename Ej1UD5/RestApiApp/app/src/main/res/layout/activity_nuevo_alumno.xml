@@ -82,7 +82,10 @@
             <ProgressBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/pb_nuevo"/>
+                android:id="@+id/pb_nuevo_alumno"
+                android:visibility="gone"
+                android:layout_below="@id/bt_nuevo_accept"
+                android:layout_centerHorizontal="true"/>
 
         </RelativeLayout>
 

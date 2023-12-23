@@ -2,6 +2,7 @@ package com.example.restapiapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
@@ -22,9 +23,9 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.restapiapp.adaptadores.AlumnosAdapter;
 import com.example.restapiapp.adaptadores.LibrosAdapter;
 import com.example.restapiapp.entidades.Alumno;
 import com.example.restapiapp.entidades.Libro;
@@ -42,6 +43,7 @@ import java.util.concurrent.Executors;
 
 public class AlumnoActivity extends AppCompatActivity implements LibrosAdapter.LibrosAdapterCallback {
   private int position;
+  private int idAlumno;
   private DBHelper dbHelper;
   private ArrayList<Libro> libros;
   private LibrosAdapter librosAdapter;
@@ -52,7 +54,7 @@ public class AlumnoActivity extends AppCompatActivity implements LibrosAdapter.L
         @Override
         public void onActivityResult(ActivityResult result) {
           if (result.getResultCode() == Activity.RESULT_OK) {
-            cargarLibros(position);
+            cargarLibros();
           }
         }
       });
@@ -63,19 +65,22 @@ public class AlumnoActivity extends AppCompatActivity implements LibrosAdapter.L
     setContentView(R.layout.activity_alumno);
     if(savedInstanceState!=null){
       position = savedInstanceState.getInt("position",-1);
+      idAlumno = savedInstanceState.getInt("idAlumno",-1);
     }
     else{
       Intent intent = getIntent();
       position = intent.getIntExtra("position", -1);
+      idAlumno = intent.getIntExtra("idAlumno",-1);
     }
     dbHelper=DBHelper.getInstance(this);
     listView=findViewById(R.id.lv_libros);
-    cargarLibros(position);
+    cargarLibros();
   }
 
   public void irNuevoLibro(View view){
     Intent myIntent = new Intent().setClass(this, NuevoLibro.class);
     myIntent.putExtra("position", position);
+    myIntent.putExtra("idAlumno", idAlumno);
     nuevoResultLauncher.launch(myIntent);
   }
 
@@ -109,6 +114,7 @@ public class AlumnoActivity extends AppCompatActivity implements LibrosAdapter.L
       duration = Toast.LENGTH_LONG;
     }
     else {
+      System.out.println(error);
       message = res.getString(R.string.error_unknown);
       duration = Toast.LENGTH_SHORT;
     }
@@ -116,12 +122,12 @@ public class AlumnoActivity extends AppCompatActivity implements LibrosAdapter.L
     toast.show();
   }
 
-  private void cargarLibros(int position){
+  private void cargarLibros(){
     if (isNetworkAvailable()) {
-      ProgressBar pbMain = (ProgressBar) findViewById(R.id.pb_main);
+      ProgressBar pbMain = (ProgressBar) findViewById(R.id.pb_libros);
       pbMain.setVisibility(View.VISIBLE);
       Resources res = getResources();
-      String url = res.getString(R.string.libro_url) + "listaLibros" + (position+1) ;
+      String url = res.getString(R.string.libro_url) + "listaLibros" + (idAlumno) ;
       System.out.println(url);
       getListaTask(url);
     }
@@ -156,10 +162,8 @@ public class AlumnoActivity extends AppCompatActivity implements LibrosAdapter.L
   }
 
   private void resetLista(String result){
-    System.out.println(result);
     try {
       JSONArray listaLibros = new JSONArray(result);
-      System.out.println(listaLibros.get(0));
 
       if(libros==null) {
         libros = new ArrayList<>();
@@ -171,6 +175,7 @@ public class AlumnoActivity extends AppCompatActivity implements LibrosAdapter.L
         JSONObject jsonObject = listaLibros.getJSONObject(i);
         Libro libro = new Libro();
         libro.fromJSON(jsonObject);
+        System.out.println(libro.toJSON().toString());
         libros.add(libro);
       }
 
@@ -178,16 +183,119 @@ public class AlumnoActivity extends AppCompatActivity implements LibrosAdapter.L
       librosAdapter.setCallback(this);
       listView.setAdapter(librosAdapter);
 
-      ProgressBar pbMain = findViewById(R.id.pb_main);
+      ProgressBar pbMain = findViewById(R.id.pb_libros);
       pbMain.setVisibility(View.GONE);
+      TextView noData = findViewById(R.id.tv_empty_libros);
+      noData.setVisibility(View.GONE);
+      if(libros.size() == 0) {
+        noData.setVisibility(View.VISIBLE);
+      }
     }
     catch (JSONException e) {
       showError(e.getMessage());
+    } catch (ParseException e) {
+      throw new RuntimeException(e);
+    }
+  }
+  public void back(View view){
+    this.finish();
+  }
+
+  @Override
+  public void eliminarPressed(int position) {
+    AlertDialog diaBox = AskOption(position);
+    diaBox.show();
+  }
+
+  private AlertDialog AskOption(final int position)
+  {
+    AlertDialog myQuittingDialogBox =new AlertDialog.Builder(this)
+        .setTitle(R.string.eliminar_usuario)
+        .setMessage(R.string.are_you_sure)
+        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int whichButton) {
+            eliminarLibro(position);
+            dialog.dismiss();
+          }
+        })
+        .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int which) {
+            dialog.dismiss();
+          }
+        })
+        .create();
+    return myQuittingDialogBox;
+  }
+
+  private void eliminarLibro(int position){
+    if(libros!=null){
+      if(libros.size()>position) {
+        Libro libro = libros.get(position);
+        if (isNetworkAvailable()) {
+          ProgressBar pbMain = (ProgressBar) findViewById(R.id.pb_libros);
+          pbMain.setVisibility(View.VISIBLE);
+          Resources res = getResources();
+          String url = res.getString(R.string.libro_url) + "eliminarLibro" + libro.getIdLibro();
+          eliminarTask(url);
+        }
+        else{
+          showError("error.IOException");
+        }
+      }
+      else{
+        showError("error.desconocido");
+      }
+    }
+    else{
+      showError("error.desconocido");
     }
   }
 
+  private void eliminarTask(String url){
+    ExecutorService executor = Executors.newSingleThreadExecutor();
+    Handler handler = new Handler(Looper.getMainLooper());
+    executor.execute(new Runnable() {
+      @Override
+      public void run() {
+        Internetop interopera= Internetop.getInstance();
+        String result = interopera.deleteTask(url);
+        handler.post(new Runnable() {
+          @Override
+          public void run() {
+            if(result.equalsIgnoreCase("error.IOException")||
+                result.equals("error.OKHttp")) {
+              showError(result);
+            }
+            else if(result.equalsIgnoreCase("null")){
+              showError("error.desconocido");
+            }
+            else{
+              ProgressBar pbMain = (ProgressBar) findViewById(R.id.pb_libros);
+              pbMain.setVisibility(View.GONE);
+              cargarLibros();
+            }
+          }
+        });
+      }
+    });
+  }
 
-  public void back(View view){
-    this.finish();
+  @Override
+  public void editarPressed(int position) throws JSONException {
+    if(libros!=null) {
+      if (libros.size() > position) {
+        Libro libro=libros.get(position);
+        libros.forEach(libro1 -> {
+          try {
+            System.out.println(libro1.toJSON().toString());
+          } catch (JSONException e) {
+            throw new RuntimeException(e);
+          }
+        });
+        Intent myIntent = new Intent().setClass(this, ModificarLibro.class);
+        myIntent.putExtra("libro", libro.toJSON().toString());
+        nuevoResultLauncher.launch(myIntent);
+      }
+    }
   }
 }

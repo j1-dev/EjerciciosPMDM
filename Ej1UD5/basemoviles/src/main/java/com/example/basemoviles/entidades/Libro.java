@@ -22,7 +22,6 @@ public class Libro {
     @JoinColumn(name="idAlumno")
     private Alumno alumno;
 
-
     public Libro() {
     }
 

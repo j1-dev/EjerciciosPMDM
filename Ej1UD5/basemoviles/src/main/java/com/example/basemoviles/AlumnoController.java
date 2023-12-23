@@ -69,7 +69,6 @@ public class AlumnoController {
    public ResponseEntity<Long> nuevo(@RequestBody Alumno alumno)
             throws URISyntaxException {
      Alumno alumnoCreado = alumnoRepositorio.save(alumno);
-     System.out.println(alumno.toString());
      if (alumnoCreado == null) {
        return ResponseEntity.notFound().build();
      } else {

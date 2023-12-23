@@ -155,7 +155,7 @@ public class NuevoAlumno extends AppCompatActivity {
     }
     if(continuar){
       Button btAceptar=findViewById(R.id.bt_nuevo_accept);
-      ProgressBar pbAceptar=findViewById(R.id.pb_nuevo);
+      ProgressBar pbAceptar=findViewById(R.id.pb_nuevo_alumno);
       //Desactivamos el botón y mostramos la barra de progreso
       btAceptar.setEnabled(false);
       btAceptar.setClickable(false);
@@ -189,9 +189,9 @@ public class NuevoAlumno extends AppCompatActivity {
         handler.post(new Runnable() {
           @Override
           public void run() {
-            Button btAceptar= findViewById(R.id.bt_nuevo_accept);//Volvemos a activar el botón aceptar
-            ProgressBar pbAceptar=(ProgressBar) findViewById(R.id.pb_nuevo);
-            pbAceptar.setVisibility(View.GONE);//Ocultamos la barra de progreso
+            Button btAceptar= findViewById(R.id.bt_nuevo_accept);
+            ProgressBar pbAceptar=(ProgressBar) findViewById(R.id.pb_nuevo_alumno);
+            pbAceptar.setVisibility(View.GONE);
             btAceptar.setEnabled(true);
             btAceptar.setClickable(true);
             long idCreado;

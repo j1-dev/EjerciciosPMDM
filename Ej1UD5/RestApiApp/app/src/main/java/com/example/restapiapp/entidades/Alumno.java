@@ -9,53 +9,53 @@ import java.util.Date;
 
 public class Alumno {
 
-    private int idAlumno;
-    private String nombre;
-    private String apellidos;
-    private Date fechaNacimiento;
+  private int idAlumno;
+  private String nombre;
+  private String apellidos;
+  private Date fechaNacimiento;
 
-    public Alumno() {
+  public Alumno() {
 
-    }
+  }
 
-    public Alumno(int idAlumno, String nombre, String apellidos, Date fechaNacimiento) {
-        this.idAlumno = idAlumno;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.fechaNacimiento = fechaNacimiento;
-    }
+  public Alumno(int idAlumno, String nombre, String apellidos, Date fechaNacimiento) {
+    this.idAlumno = idAlumno;
+    this.nombre = nombre;
+    this.apellidos = apellidos;
+    this.fechaNacimiento = fechaNacimiento;
+  }
 
-    public int getIdAlumno() {
-        return idAlumno;
-    }
+  public int getIdAlumno() {
+    return idAlumno;
+  }
 
-    public void setIdAlumno(int idAlumno) {
-        this.idAlumno = idAlumno;
-    }
+  public void setIdAlumno(int idAlumno) {
+    this.idAlumno = idAlumno;
+  }
 
-    public String getNombre() {
-        return nombre;
-    }
+  public String getNombre() {
+    return nombre;
+  }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
+  }
 
-    public String getApellidos() {
-        return apellidos;
-    }
+  public String getApellidos() {
+    return apellidos;
+  }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
+  public void setApellidos(String apellidos) {
+    this.apellidos = apellidos;
+  }
 
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
+  public Date getFechaNacimiento() {
+    return fechaNacimiento;
+  }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
+  public void setFechaNacimiento(Date fechaNacimiento) {
+    this.fechaNacimiento = fechaNacimiento;
+  }
 
   public void fromJSON(JSONObject jsonObject) throws JSONException, ParseException {
     if (!jsonObject.isNull("idAlumno")) {
@@ -84,6 +84,28 @@ public class Alumno {
     } else {
       this.fechaNacimiento = null;
     }
+  }
+
+  public void fromJSONString(String string) throws JSONException, ParseException {
+    JSONObject json = new JSONObject(string);
+    fromJSON(json);
+  }
+
+  public JSONObject toJSON() throws JSONException {
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("idAlumno", idAlumno);
+    jsonObject.put("nombre", nombre);
+    jsonObject.put("apellidos", apellidos);
+
+    if (fechaNacimiento != null) {
+      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+      String formattedDate = sdf.format(fechaNacimiento);
+      jsonObject.put("fechaNacimiento", formattedDate);
+    } else {
+      jsonObject.put("fechaNacimiento", JSONObject.NULL);
+    }
+
+    return jsonObject;
   }
 
   @Override

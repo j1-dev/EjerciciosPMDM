@@ -2,6 +2,7 @@ package com.example.restapiapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.ConnectivityManager;
@@ -22,6 +23,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.restapiapp.adaptadores.AlumnosAdapter;
@@ -109,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements AlumnosAdapter.Al
 
   private void cargarAlumnos(){
     if (isNetworkAvailable()) {
-      ProgressBar pbMain = (ProgressBar) findViewById(R.id.pb_main);
+      ProgressBar pbMain = (ProgressBar) findViewById(R.id.pb_alumnos);
       pbMain.setVisibility(View.VISIBLE);
       Resources res = getResources();
       String url = res.getString(R.string.alumno_url) + "listaAlumnos";
@@ -146,10 +148,8 @@ public class MainActivity extends AppCompatActivity implements AlumnosAdapter.Al
   }
 
   private void resetLista(String result){
-    System.out.println(result);
     try {
       JSONArray listaAlumnos = new JSONArray(result);
-      System.out.println(listaAlumnos.get(0));
 
       if(alumnos==null) {
         alumnos = new ArrayList<>();
@@ -168,10 +168,13 @@ public class MainActivity extends AppCompatActivity implements AlumnosAdapter.Al
       alumnosAdapter.setCallback(this);
       listView.setAdapter(alumnosAdapter);
 
-      ProgressBar pbMain = findViewById(R.id.pb_main);
+      ProgressBar pbMain = findViewById(R.id.pb_alumnos);
       pbMain.setVisibility(View.GONE);
-      TextView noData = findViewById(R.id.tv_no_data);
+      TextView noData = findViewById(R.id.tv_empty_alumnos);
       noData.setVisibility(View.GONE);
+      if(alumnos.size() == 0) {
+        noData.setVisibility(View.VISIBLE);
+      }
     }
     catch (JSONException | ParseException e) {
       showError(e.getMessage());
@@ -183,6 +186,98 @@ public class MainActivity extends AppCompatActivity implements AlumnosAdapter.Al
   public void verLibrosPressed(int position) {
     Intent myIntent = new Intent().setClass(this, AlumnoActivity.class);
     myIntent.putExtra("position", position);
+    myIntent.putExtra("idAlumno", alumnos.get(position).getIdAlumno());
     nuevoResultLauncher.launch(myIntent);
+  }
+
+  @Override
+  public void eliminarPressed(int position) {
+    AlertDialog diaBox = AskOption(position);
+    diaBox.show();
+  }
+
+  private AlertDialog AskOption(final int position)
+  {
+    AlertDialog myQuittingDialogBox =new AlertDialog.Builder(this)
+        .setTitle(R.string.eliminar_usuario)
+        .setMessage(R.string.are_you_sure)
+        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int whichButton) {
+            eliminarAlumno(position);
+            dialog.dismiss();
+          }
+        })
+        .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int which) {
+            dialog.dismiss();
+          }
+        })
+        .create();
+    return myQuittingDialogBox;
+  }
+
+  private void eliminarAlumno(int position){
+    if(alumnos!=null){
+      if(alumnos.size()>position) {
+        Alumno alumno = alumnos.get(position);
+        if (isNetworkAvailable()) {
+          ProgressBar pbMain = (ProgressBar) findViewById(R.id.pb_alumnos);
+          pbMain.setVisibility(View.VISIBLE);
+          Resources res = getResources();
+          String url = res.getString(R.string.alumno_url) + "eliminarAlumno" + alumno.getIdAlumno();
+          eliminarTask(url);
+        }
+        else{
+          showError("error.IOException");
+        }
+      }
+      else{
+        showError("error.desconocido");
+      }
+    }
+    else{
+      showError("error.desconocido");
+    }
+  }
+
+  private void eliminarTask(String url){
+    ExecutorService executor = Executors.newSingleThreadExecutor();
+    Handler handler = new Handler(Looper.getMainLooper());
+    executor.execute(new Runnable() {
+      @Override
+      public void run() {
+        Internetop interopera= Internetop.getInstance();
+        String result = interopera.deleteTask(url);
+        handler.post(new Runnable() {
+          @Override
+          public void run() {
+            if(result.equalsIgnoreCase("error.IOException")||
+                result.equals("error.OKHttp")) {
+              showError(result);
+            }
+            else if(result.equalsIgnoreCase("null")){
+              showError("error.desconocido");
+            }
+            else{
+              ProgressBar pbMain = (ProgressBar) findViewById(R.id.pb_alumnos);
+              pbMain.setVisibility(View.GONE);
+              cargarAlumnos();
+            }
+          }
+        });
+      }
+    });
+  }
+
+  @Override
+  public void editarPressed(int position) throws JSONException {
+    if(alumnos!=null) {
+      if (alumnos.size() > position) {
+        Alumno alumno=alumnos.get(position);
+        Intent myIntent = new Intent().setClass(this, ModificarAlumno.class);
+        myIntent.putExtra("alumno",alumno.toJSON().toString());
+        nuevoResultLauncher.launch(myIntent);
+      }
+    }
   }
 }

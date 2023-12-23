@@ -25,6 +25,12 @@
             android:name=".NuevoAlumno"
             android:exported="false" />
         <activity
+            android:name=".ModificarLibro"
+            android:exported="false" />
+        <activity
+            android:name=".ModificarAlumno"
+            android:exported="false" />
+        <activity
             android:name=".AlumnoActivity"
             android:exported="false" />
         <activity
