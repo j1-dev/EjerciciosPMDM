@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NuevoLibro">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tv_nuevo_libro_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre del libro"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/et_nuevo_libro_name"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_nuevo_libro_name"
+                android:hint="@string/write_here"/>
+
+            <Button
+                android:id="@+id/bt_nuevo_accept"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/et_nuevo_libro_name"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="40dp"
+                android:text="Aceptar"
+                android:onClick="aceptar"
+                android:layout_centerHorizontal="true"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:scaleType="fitXY"
+        android:padding="0dp"
+        app:fabCustomSize="80dp"
+        android:layout_margin="40dp"
+        android:src="@drawable/ic_back_white"
+        app:maxImageSize="80dp"
+        app:borderWidth="0dp"
+        android:elevation="0dp"
+        app:elevation="0dp"
+        android:onClick="back"
+        app:backgroundTint="@color/back"/>
+
+</RelativeLayout>
