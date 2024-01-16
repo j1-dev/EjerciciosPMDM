@@ -26,8 +26,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.restapiapp.adaptadores.AlumnosAdapter;
-import com.example.restapiapp.entidades.Alumno;
+import com.example.restapiapp.adaptadores.PersonasAdapter;
+import com.example.restapiapp.entidades.Persona;
 import com.example.restapiapp.util.DBHelper;
 import com.example.restapiapp.util.Internetop;
 
@@ -35,16 +35,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class MainActivity extends AppCompatActivity implements AlumnosAdapter.AlumnosAdapterCallback {
+public class MainActivity extends AppCompatActivity implements PersonasAdapter.PersonasAdapterCallback {
 
   private DBHelper dbHelper;
-  private ArrayList<Alumno> alumnos;
-  private AlumnosAdapter alumnosAdapter;
+  private ArrayList<Persona> personas;
+  private PersonasAdapter personasAdapter;
   private ListView listView;
   private final ActivityResultLauncher<Intent> nuevoResultLauncher = registerForActivityResult(
       new ActivityResultContracts.StartActivityForResult(),
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements AlumnosAdapter.Al
         @Override
         public void onActivityResult(ActivityResult result) {
           if (result.getResultCode() == Activity.RESULT_OK) {
-            cargarAlumnos();
+            cargarPersonas();
           }
         }
       });
@@ -62,8 +61,8 @@ public class MainActivity extends AppCompatActivity implements AlumnosAdapter.Al
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     dbHelper=DBHelper.getInstance(this);
-    listView=findViewById(R.id.lv_alumnos);
-    cargarAlumnos();
+    listView=findViewById(R.id.lv_personas);
+    cargarPersonas();
   }
 
   private Boolean isNetworkAvailable() {
@@ -104,17 +103,17 @@ public class MainActivity extends AppCompatActivity implements AlumnosAdapter.Al
     toast.show();
   }
 
-  public void irNuevoAlumno(View view){
-    Intent myIntent = new Intent().setClass(this, NuevoAlumno.class);
+  public void irNuevoPersona(View view){
+    Intent myIntent = new Intent().setClass(this, NuevoPersona.class);
     nuevoResultLauncher.launch(myIntent);
   }
 
-  private void cargarAlumnos(){
+  private void cargarPersonas(){
     if (isNetworkAvailable()) {
-      ProgressBar pbMain = (ProgressBar) findViewById(R.id.pb_alumnos);
+      ProgressBar pbMain = (ProgressBar) findViewById(R.id.pb_personas);
       pbMain.setVisibility(View.VISIBLE);
       Resources res = getResources();
-      String url = res.getString(R.string.alumno_url) + "listaAlumnos";
+      String url = res.getString(R.string.persona_url) + "listaPersonas";
       getListaTask(url);
     }
     else{
@@ -149,44 +148,44 @@ public class MainActivity extends AppCompatActivity implements AlumnosAdapter.Al
 
   private void resetLista(String result){
     try {
-      JSONArray listaAlumnos = new JSONArray(result);
+      JSONArray listaPersonas = new JSONArray(result);
 
-      if(alumnos==null) {
-        alumnos = new ArrayList<>();
+      if(personas==null) {
+        personas = new ArrayList<>();
       }
       else{
-        alumnos.clear();
+        personas.clear();
       }
-      for (int i = 0; i < listaAlumnos.length(); ++i) {
-        JSONObject jsonObject = listaAlumnos.getJSONObject(i);
-        Alumno alumno = new Alumno();
-        alumno.fromJSON(jsonObject);
-        alumnos.add(alumno);
+      for (int i = 0; i < listaPersonas.length(); ++i) {
+        JSONObject jsonObject = listaPersonas.getJSONObject(i);
+        Persona persona = new Persona();
+        persona.fromJSON(jsonObject);
+        personas.add(persona);
       }
 
-      alumnosAdapter = new AlumnosAdapter(this, alumnos);
-      alumnosAdapter.setCallback(this);
-      listView.setAdapter(alumnosAdapter);
+      personasAdapter = new PersonasAdapter(this, personas);
+      personasAdapter.setCallback(this);
+      listView.setAdapter(personasAdapter);
 
-      ProgressBar pbMain = findViewById(R.id.pb_alumnos);
+      ProgressBar pbMain = findViewById(R.id.pb_personas);
       pbMain.setVisibility(View.GONE);
-      TextView noData = findViewById(R.id.tv_empty_alumnos);
+      TextView noData = findViewById(R.id.tv_empty_personas);
       noData.setVisibility(View.GONE);
-      if(alumnos.size() == 0) {
+      if(personas.size() == 0) {
         noData.setVisibility(View.VISIBLE);
       }
     }
-    catch (JSONException | ParseException e) {
+    catch (JSONException e) {
       showError(e.getMessage());
     }
   }
 
 
   @Override
-  public void verLibrosPressed(int position) {
-    Intent myIntent = new Intent().setClass(this, AlumnoActivity.class);
+  public void verTiendasPressed(int position) {
+    Intent myIntent = new Intent().setClass(this, PersonaActivity.class);
     myIntent.putExtra("position", position);
-    myIntent.putExtra("idAlumno", alumnos.get(position).getIdAlumno());
+    myIntent.putExtra("idPersona", personas.get(position).getIdPersona());
     nuevoResultLauncher.launch(myIntent);
   }
 
@@ -203,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements AlumnosAdapter.Al
         .setMessage(R.string.are_you_sure)
         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
           public void onClick(DialogInterface dialog, int whichButton) {
-            eliminarAlumno(position);
+            eliminarPersona(position);
             dialog.dismiss();
           }
         })
@@ -216,15 +215,15 @@ public class MainActivity extends AppCompatActivity implements AlumnosAdapter.Al
     return myQuittingDialogBox;
   }
 
-  private void eliminarAlumno(int position){
-    if(alumnos!=null){
-      if(alumnos.size()>position) {
-        Alumno alumno = alumnos.get(position);
+  private void eliminarPersona(int position){
+    if(personas!=null){
+      if(personas.size()>position) {
+        Persona persona = personas.get(position);
         if (isNetworkAvailable()) {
-          ProgressBar pbMain = (ProgressBar) findViewById(R.id.pb_alumnos);
+          ProgressBar pbMain = (ProgressBar) findViewById(R.id.pb_personas);
           pbMain.setVisibility(View.VISIBLE);
           Resources res = getResources();
-          String url = res.getString(R.string.alumno_url) + "eliminarAlumno" + alumno.getIdAlumno();
+          String url = res.getString(R.string.persona_url) + "eliminarPersona" + persona.getIdPersona();
           eliminarTask(url);
         }
         else{
@@ -259,9 +258,9 @@ public class MainActivity extends AppCompatActivity implements AlumnosAdapter.Al
               showError("error.desconocido");
             }
             else{
-              ProgressBar pbMain = (ProgressBar) findViewById(R.id.pb_alumnos);
+              ProgressBar pbMain = (ProgressBar) findViewById(R.id.pb_personas);
               pbMain.setVisibility(View.GONE);
-              cargarAlumnos();
+              cargarPersonas();
             }
           }
         });
@@ -271,11 +270,11 @@ public class MainActivity extends AppCompatActivity implements AlumnosAdapter.Al
 
   @Override
   public void editarPressed(int position) throws JSONException {
-    if(alumnos!=null) {
-      if (alumnos.size() > position) {
-        Alumno alumno=alumnos.get(position);
-        Intent myIntent = new Intent().setClass(this, ModificarAlumno.class);
-        myIntent.putExtra("alumno",alumno.toJSON().toString());
+    if(personas!=null) {
+      if (personas.size() > position) {
+        Persona persona=personas.get(position);
+        Intent myIntent = new Intent().setClass(this, ModificarPersona.class);
+        myIntent.putExtra("persona",persona.toJSON().toString());
         nuevoResultLauncher.launch(myIntent);
       }
     }

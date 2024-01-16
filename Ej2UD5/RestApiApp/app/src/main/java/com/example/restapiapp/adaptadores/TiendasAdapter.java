@@ -9,37 +9,37 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.restapiapp.entidades.Libro;
+import com.example.restapiapp.entidades.Tienda;
 import com.example.restapiapp.R;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class LibrosAdapter extends BaseAdapter {
+public class TiendasAdapter extends BaseAdapter {
 
   private final Context context;
-  private final ArrayList<Libro> libros;
-  private LibrosAdapterCallback callback;
+  private final ArrayList<Tienda> tiendas;
+  private TiendasAdapterCallback callback;
 
-  public LibrosAdapter(Context context, ArrayList<Libro> libros){
+  public TiendasAdapter(Context context, ArrayList<Tienda> tiendas){
     super();
     this.context=context;
-    this.libros=libros;
+    this.tiendas=tiendas;
   }
 
   @Override
   public int getCount() {
-    return libros.size();
+    return tiendas.size();
   }
 
   @Override
   public Object getItem(int position) {
-    if(libros==null) {
+    if(tiendas==null) {
       return null;
     }
     else{
-      return libros.get(position);
+      return tiendas.get(position);
     }
   }
 
@@ -51,20 +51,20 @@ public class LibrosAdapter extends BaseAdapter {
   @Override
   public View getView(int position, View convertView, ViewGroup parent) {
     View item = convertView;
-    LibroWrapper liWrapper;
+    TiendaWrapper liWrapper;
     if (item == null) {
-      liWrapper = new LibroWrapper();
+      liWrapper = new TiendaWrapper();
       LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-      item = inflater.inflate(R.layout.libro_item, parent, false);
-      liWrapper.nombre = item.findViewById(R.id.tv_li_nombre_libro);
+      item = inflater.inflate(R.layout.tienda_item, parent, false);
+      liWrapper.nombre = item.findViewById(R.id.tv_li_nombre_tienda);
       liWrapper.editar = item.findViewById(R.id.bt_li_update);
       liWrapper.eliminar = item.findViewById(R.id.bt_li_delete);
       item.setTag(liWrapper);
     } else {
-      liWrapper = (LibroWrapper) item.getTag();
+      liWrapper = (TiendaWrapper) item.getTag();
     }
-    Libro libro = libros.get(position);
-    liWrapper.nombre.setText(libro.getNombre());
+    Tienda tienda = tiendas.get(position);
+    liWrapper.nombre.setText(tienda.getNombre());
     liWrapper.editar.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -84,17 +84,17 @@ public class LibrosAdapter extends BaseAdapter {
     return item;
   }
 
-  static class LibroWrapper {
+  static class TiendaWrapper {
     TextView nombre;
     ImageButton eliminar;
     ImageButton editar;
   }
 
-  public void setCallback(LibrosAdapterCallback callback){
+  public void setCallback(TiendasAdapterCallback callback){
     this.callback = callback;
   }
 
-  public interface LibrosAdapterCallback {
+  public interface TiendasAdapterCallback {
     public void eliminarPressed(int position);
     public void editarPressed(int position) throws JSONException;
   }

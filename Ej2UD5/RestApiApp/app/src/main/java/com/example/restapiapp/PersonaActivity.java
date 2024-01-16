@@ -26,9 +26,8 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.restapiapp.adaptadores.LibrosAdapter;
-import com.example.restapiapp.entidades.Alumno;
-import com.example.restapiapp.entidades.Libro;
+import com.example.restapiapp.adaptadores.TiendasAdapter;
+import com.example.restapiapp.entidades.Tienda;
 import com.example.restapiapp.util.DBHelper;
 import com.example.restapiapp.util.Internetop;
 
@@ -36,17 +35,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class AlumnoActivity extends AppCompatActivity implements LibrosAdapter.LibrosAdapterCallback {
+public class PersonaActivity extends AppCompatActivity implements TiendasAdapter.TiendasAdapterCallback {
   private int position;
-  private int idAlumno;
+  private int idPersona;
   private DBHelper dbHelper;
-  private ArrayList<Libro> libros;
-  private LibrosAdapter librosAdapter;
+  private ArrayList<Tienda> tiendas;
+  private TiendasAdapter tiendasAdapter;
   private ListView listView;
   private final ActivityResultLauncher<Intent> nuevoResultLauncher = registerForActivityResult(
       new ActivityResultContracts.StartActivityForResult(),
@@ -54,7 +52,7 @@ public class AlumnoActivity extends AppCompatActivity implements LibrosAdapter.L
         @Override
         public void onActivityResult(ActivityResult result) {
           if (result.getResultCode() == Activity.RESULT_OK) {
-            cargarLibros();
+            cargarTiendas();
           }
         }
       });
@@ -62,25 +60,25 @@ public class AlumnoActivity extends AppCompatActivity implements LibrosAdapter.L
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_alumno);
+    setContentView(R.layout.activity_persona);
     if(savedInstanceState!=null){
       position = savedInstanceState.getInt("position",-1);
-      idAlumno = savedInstanceState.getInt("idAlumno",-1);
+      idPersona = savedInstanceState.getInt("idPersona",-1);
     }
     else{
       Intent intent = getIntent();
       position = intent.getIntExtra("position", -1);
-      idAlumno = intent.getIntExtra("idAlumno",-1);
+      idPersona = intent.getIntExtra("idPersona",-1);
     }
     dbHelper=DBHelper.getInstance(this);
-    listView=findViewById(R.id.lv_libros);
-    cargarLibros();
+    listView=findViewById(R.id.lv_tiendas);
+    cargarTiendas();
   }
 
-  public void irNuevoLibro(View view){
-    Intent myIntent = new Intent().setClass(this, NuevoLibro.class);
+  public void irNuevoTienda(View view){
+    Intent myIntent = new Intent().setClass(this, NuevoTienda.class);
     myIntent.putExtra("position", position);
-    myIntent.putExtra("idAlumno", idAlumno);
+    myIntent.putExtra("idPersona", idPersona);
     nuevoResultLauncher.launch(myIntent);
   }
 
@@ -122,12 +120,12 @@ public class AlumnoActivity extends AppCompatActivity implements LibrosAdapter.L
     toast.show();
   }
 
-  private void cargarLibros(){
+  private void cargarTiendas(){
     if (isNetworkAvailable()) {
-      ProgressBar pbMain = (ProgressBar) findViewById(R.id.pb_libros);
+      ProgressBar pbMain = (ProgressBar) findViewById(R.id.pb_tiendas);
       pbMain.setVisibility(View.VISIBLE);
       Resources res = getResources();
-      String url = res.getString(R.string.libro_url) + "listaLibros" + (idAlumno) ;
+      String url = res.getString(R.string.tienda_url) + "listaTiendas" + (idPersona) ;
       System.out.println(url);
       getListaTask(url);
     }
@@ -163,38 +161,36 @@ public class AlumnoActivity extends AppCompatActivity implements LibrosAdapter.L
 
   private void resetLista(String result){
     try {
-      JSONArray listaLibros = new JSONArray(result);
+      JSONArray listaTiendas = new JSONArray(result);
 
-      if(libros==null) {
-        libros = new ArrayList<>();
+      if(tiendas==null) {
+        tiendas = new ArrayList<>();
       }
       else{
-        libros.clear();
+        tiendas.clear();
       }
-      for (int i = 0; i < listaLibros.length(); ++i) {
-        JSONObject jsonObject = listaLibros.getJSONObject(i);
-        Libro libro = new Libro();
-        libro.fromJSON(jsonObject);
-        System.out.println(libro.toJSON().toString());
-        libros.add(libro);
+      for (int i = 0; i < listaTiendas.length(); ++i) {
+        JSONObject jsonObject = listaTiendas.getJSONObject(i);
+        Tienda tienda = new Tienda();
+        tienda.fromJSON(jsonObject);
+        System.out.println(tienda.toJSON().toString());
+        tiendas.add(tienda);
       }
 
-      librosAdapter = new LibrosAdapter(this,libros);
-      librosAdapter.setCallback(this);
-      listView.setAdapter(librosAdapter);
+      tiendasAdapter = new TiendasAdapter(this,tiendas);
+      tiendasAdapter.setCallback(this);
+      listView.setAdapter(tiendasAdapter);
 
-      ProgressBar pbMain = findViewById(R.id.pb_libros);
+      ProgressBar pbMain = findViewById(R.id.pb_tiendas);
       pbMain.setVisibility(View.GONE);
-      TextView noData = findViewById(R.id.tv_empty_libros);
+      TextView noData = findViewById(R.id.tv_empty_tiendas);
       noData.setVisibility(View.GONE);
-      if(libros.size() == 0) {
+      if(tiendas.size() == 0) {
         noData.setVisibility(View.VISIBLE);
       }
     }
     catch (JSONException e) {
       showError(e.getMessage());
-    } catch (ParseException e) {
-      throw new RuntimeException(e);
     }
   }
   public void back(View view){
@@ -214,7 +210,7 @@ public class AlumnoActivity extends AppCompatActivity implements LibrosAdapter.L
         .setMessage(R.string.are_you_sure)
         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
           public void onClick(DialogInterface dialog, int whichButton) {
-            eliminarLibro(position);
+            eliminarTienda(position);
             dialog.dismiss();
           }
         })
@@ -227,15 +223,15 @@ public class AlumnoActivity extends AppCompatActivity implements LibrosAdapter.L
     return myQuittingDialogBox;
   }
 
-  private void eliminarLibro(int position){
-    if(libros!=null){
-      if(libros.size()>position) {
-        Libro libro = libros.get(position);
+  private void eliminarTienda(int position){
+    if(tiendas!=null){
+      if(tiendas.size()>position) {
+        Tienda tienda = tiendas.get(position);
         if (isNetworkAvailable()) {
-          ProgressBar pbMain = (ProgressBar) findViewById(R.id.pb_libros);
+          ProgressBar pbMain = (ProgressBar) findViewById(R.id.pb_tiendas);
           pbMain.setVisibility(View.VISIBLE);
           Resources res = getResources();
-          String url = res.getString(R.string.libro_url) + "eliminarLibro" + libro.getIdLibro();
+          String url = res.getString(R.string.tienda_url) + "eliminarTienda" + tienda.getIdTienda();
           eliminarTask(url);
         }
         else{
@@ -270,9 +266,9 @@ public class AlumnoActivity extends AppCompatActivity implements LibrosAdapter.L
               showError("error.desconocido");
             }
             else{
-              ProgressBar pbMain = (ProgressBar) findViewById(R.id.pb_libros);
+              ProgressBar pbMain = (ProgressBar) findViewById(R.id.pb_tiendas);
               pbMain.setVisibility(View.GONE);
-              cargarLibros();
+              cargarTiendas();
             }
           }
         });
@@ -282,18 +278,18 @@ public class AlumnoActivity extends AppCompatActivity implements LibrosAdapter.L
 
   @Override
   public void editarPressed(int position) throws JSONException {
-    if(libros!=null) {
-      if (libros.size() > position) {
-        Libro libro=libros.get(position);
-        libros.forEach(libro1 -> {
+    if(tiendas!=null) {
+      if (tiendas.size() > position) {
+        Tienda tienda=tiendas.get(position);
+        tiendas.forEach(tienda1 -> {
           try {
-            System.out.println(libro1.toJSON().toString());
+            System.out.println(tienda1.toJSON().toString());
           } catch (JSONException e) {
             throw new RuntimeException(e);
           }
         });
-        Intent myIntent = new Intent().setClass(this, ModificarLibro.class);
-        myIntent.putExtra("libro", libro.toJSON().toString());
+        Intent myIntent = new Intent().setClass(this, ModificarTienda.class);
+        myIntent.putExtra("tienda", tienda.toJSON().toString());
         nuevoResultLauncher.launch(myIntent);
       }
     }

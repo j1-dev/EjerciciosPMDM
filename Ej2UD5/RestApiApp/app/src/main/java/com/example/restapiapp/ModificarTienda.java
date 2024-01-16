@@ -15,45 +15,67 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.restapiapp.entidades.Libro;
 import com.example.restapiapp.entidades.Parametro;
+import com.example.restapiapp.entidades.Tienda;
 import com.example.restapiapp.util.DBHelper;
 import com.example.restapiapp.util.Internetop;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class NuevoLibro extends AppCompatActivity {
+public class ModificarTienda extends AppCompatActivity {
   private int position;
-  private int idAlumno;
+  private Tienda tienda;
   private DBHelper dbHelper;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_nuevo_libro);
-    if(savedInstanceState!=null){/*Si hemos hecho onSaveInstanceState previamente y hemos almacenado información,
-        la recuperamos*/
+    setContentView(R.layout.activity_modificar_tienda);
+    if(savedInstanceState!=null){
       position = savedInstanceState.getInt("position",-1);
-      idAlumno = savedInstanceState.getInt("idAlumno", -1);
+      try {
+        tienda.fromJSONString(savedInstanceState.getString("tienda"));
+      } catch (JSONException e) {
+        throw new RuntimeException(e);
+      }
     }
-    else{//Si es la primera vez que se crea la actividad, obtenemos la información que pasamos a través del Intent
+    else{
       Intent intent = getIntent();
       position = intent.getIntExtra("position", -1);
-      idAlumno = intent.getIntExtra("idAlumno", -1);
+      tienda = new Tienda();
+      try {
+        tienda.fromJSONString(intent.getStringExtra("tienda"));
+      } catch (JSONException e) {
+        throw new RuntimeException(e);
+      }
     }
+    fillInformation();
+  }
+
+  private void fillInformation() {
+    EditText textNombre = findViewById(R.id.et_modificar_tienda_name);
+    System.out.println(textNombre.toString());
+    System.out.println(tienda.getNombre());
+    textNombre.setText(tienda.getNombre());
   }
 
   @Override
   public void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
+    try {
+      outState.putString("tienda", tienda.toJSON().toString());
+    } catch (JSONException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   private Boolean isNetworkAvailable() {
@@ -78,40 +100,36 @@ public class NuevoLibro extends AppCompatActivity {
     if(dbHelper==null){
       dbHelper=DBHelper.getInstance(this);
     }
-    EditText etNombre = findViewById(R.id.et_nuevo_libro_name);
-    String nombre=etNombre.getText().toString();
-    Button btAceptar= findViewById(R.id.bt_nuevo_accept);
+    EditText etNombre = findViewById(R.id.et_modificar_tienda_name);
+    String nombre = etNombre.getText().toString();
+    Button btAceptar = findViewById(R.id.bt_modificar_accept_tienda);
     btAceptar.setEnabled(false);
     btAceptar.setClickable(false);
     Resources res = getResources();
-    Libro libro = new Libro();
-    libro.setNombre(nombre);
-    libro.setIdAlumno(idAlumno);
     if (isNetworkAvailable()) {
-      String url = res.getString(R.string.libro_url) + "nuevoLibro";
-      sendTask(url, libro);
+      String url = res.getString(R.string.tienda_url) + ("actualizarTienda"+tienda.getIdTienda());
+      sendTask(url, nombre);
+      System.out.println(url);
     } else {
       showError("error.IOException");
     }
   }
 
-  private void sendTask(String url, Libro libro) {
+  private void sendTask(String url, String nombre) {
     ExecutorService executor = Executors.newSingleThreadExecutor();
     Handler handler = new Handler(Looper.getMainLooper());
     executor.execute(new Runnable() {
       @Override
       public void run() {
         Internetop interopera=Internetop.getInstance();
+
         List<Parametro> params = new ArrayList<>();
-        params.add(new Parametro("nombre", libro.getNombre()));
-        params.add(new Parametro("idAlumno", libro.getIdAlumno()+""));
-        String result = interopera.postText(url,params);
-        System.out.println(url);
-        System.out.println(libro.getNombre() + "-" + libro.getIdAlumno());
+        params.add(new Parametro("nombre", nombre));
+        String result = interopera.putText(url,params);
         handler.post(new Runnable() {
           @Override
           public void run() {
-            Button btAceptar= findViewById(R.id.bt_nuevo_accept);//Volvemos a activar el botón aceptar
+            Button btAceptar = findViewById(R.id.bt_modificar_accept_tienda);//Volvemos a activar el botón aceptar
             btAceptar.setEnabled(true);
             btAceptar.setClickable(true);
             long idCreado;
@@ -150,8 +168,6 @@ public class NuevoLibro extends AppCompatActivity {
     toast.setGravity(Gravity.CENTER, 0, 0);
     toast.show();
   }
-
-
 
   public void back(View view) {
     this.finish();

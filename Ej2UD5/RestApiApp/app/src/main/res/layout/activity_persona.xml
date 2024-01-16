@@ -4,19 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AlumnoActivity">
+    tools:context=".PersonaActivity">
 
     <TextView
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Libros"
+        android:text="Tiendas"
         android:textSize="40dp"
         android:fontWeight="700"
         android:layout_margin="10dp"/>
 
     <TextView
-        android:id="@+id/tv_empty_libros"
+        android:id="@+id/tv_empty_tiendas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="no hay datos"
@@ -24,14 +24,14 @@
         android:layout_centerVertical="true"/>
 
     <ListView
-        android:id="@+id/lv_libros"
+        android:id="@+id/lv_tiendas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:descendantFocusability="beforeDescendants"
         android:paddingTop="70dp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_nuevo_libro"
+        android:id="@+id/fab_nuevo_tienda"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -45,7 +45,7 @@
         app:borderWidth="0dp"
         android:elevation="0dp"
         app:elevation="0dp"
-        android:onClick="irNuevoLibro"
+        android:onClick="irNuevoTienda"
         app:backgroundTint="@color/molon"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -69,8 +69,8 @@
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/pb_libros"
-        android:layout_below="@id/lv_libros"
+        android:id="@+id/pb_tiendas"
+        android:layout_below="@id/lv_tiendas"
         android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv_li_nombre_apellidos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gerardo Elias López de Uralde"
+        android:layout_margin="10dp"/>
+
+<!--    <Button-->
+<!--        android:id="@+id/bt_ver_libros"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginRight="10dp"-->
+<!--        android:text="Ver libros"-->
+<!--        android:onClick="verLibros"/>-->
+
+    <ImageButton
+        android:id="@+id/bt_li_delete"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/eliminar_azul"
+        android:layout_alignParentRight="true"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"/>
+
+    <ImageButton
+        android:id="@+id/bt_li_update"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/editar_azul"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:layout_toLeftOf="@id/bt_li_delete"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_li_dni"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="05-03-1985"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/tv_li_nombre_apellidos"/>
+
+</RelativeLayout>
