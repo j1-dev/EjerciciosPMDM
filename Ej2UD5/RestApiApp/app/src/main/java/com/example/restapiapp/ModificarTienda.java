@@ -63,9 +63,14 @@ public class ModificarTienda extends AppCompatActivity {
 
   private void fillInformation() {
     EditText textNombre = findViewById(R.id.et_modificar_tienda_name);
-    System.out.println(textNombre.toString());
-    System.out.println(tienda.getNombre());
+    EditText textDireccion = findViewById(R.id.et_modificar_tienda_address);
+    EditText textLatitud = findViewById(R.id.et_modificar_tienda_latitude);
+    EditText textLongitud = findViewById(R.id.et_modificar_tienda_longitude);
+
     textNombre.setText(tienda.getNombre());
+    textDireccion.setText(tienda.getDireccion());
+    textLatitud.setText((int) tienda.getLatitud());
+    textLongitud.setText((int) tienda.getLongitud());
   }
 
   @Override
@@ -100,22 +105,30 @@ public class ModificarTienda extends AppCompatActivity {
     if(dbHelper==null){
       dbHelper=DBHelper.getInstance(this);
     }
-    EditText etNombre = findViewById(R.id.et_modificar_tienda_name);
-    String nombre = etNombre.getText().toString();
+    EditText textNombre = findViewById(R.id.et_modificar_tienda_name);
+    EditText textDireccion = findViewById(R.id.et_modificar_tienda_address);
+    EditText textLatitud = findViewById(R.id.et_modificar_tienda_latitude);
+    EditText textLongitud = findViewById(R.id.et_modificar_tienda_longitude);
+
+    String nombre = textNombre.getText().toString();
+    String direccion = textDireccion.getText().toString();
+    String latitud = textLatitud.getText().toString();
+    String longitud = textLongitud.getText().toString();
+
     Button btAceptar = findViewById(R.id.bt_modificar_accept_tienda);
     btAceptar.setEnabled(false);
     btAceptar.setClickable(false);
     Resources res = getResources();
     if (isNetworkAvailable()) {
       String url = res.getString(R.string.tienda_url) + ("actualizarTienda"+tienda.getIdTienda());
-      sendTask(url, nombre);
+      sendTask(url, nombre, direccion, latitud, longitud);
       System.out.println(url);
     } else {
       showError("error.IOException");
     }
   }
 
-  private void sendTask(String url, String nombre) {
+  private void sendTask(String url, String nombre, String direccion, String latitud, String longitud) {
     ExecutorService executor = Executors.newSingleThreadExecutor();
     Handler handler = new Handler(Looper.getMainLooper());
     executor.execute(new Runnable() {
@@ -125,6 +138,9 @@ public class ModificarTienda extends AppCompatActivity {
 
         List<Parametro> params = new ArrayList<>();
         params.add(new Parametro("nombre", nombre));
+        params.add(new Parametro("direccion", direccion));
+        params.add(new Parametro("latitud", latitud));
+        params.add(new Parametro("longitud", longitud));
         String result = interopera.putText(url,params);
         handler.post(new Runnable() {
           @Override

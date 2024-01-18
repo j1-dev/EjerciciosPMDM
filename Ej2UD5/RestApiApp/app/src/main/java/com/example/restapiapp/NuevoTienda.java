@@ -77,14 +77,25 @@ public class NuevoTienda extends AppCompatActivity {
     if(dbHelper==null){
       dbHelper=DBHelper.getInstance(this);
     }
-    EditText etNombre = findViewById(R.id.et_nuevo_tienda_name);
-    String nombre=etNombre.getText().toString();
+    EditText textNombre = findViewById(R.id.et_nuevo_tienda_name);
+    EditText textDireccion = findViewById(R.id.et_nuevo_tienda_address);
+    EditText textLatitud = findViewById(R.id.et_nuevo_tienda_latitude);
+    EditText textLongitud = findViewById(R.id.et_nuevo_tienda_longitude);
+
+    String nombre = textNombre.getText().toString();
+    String direccion = textDireccion.getText().toString();
+    String latitud = textLatitud.getText().toString();
+    String longitud = textLongitud.getText().toString();
+
     Button btAceptar= findViewById(R.id.bt_nuevo_accept);
     btAceptar.setEnabled(false);
     btAceptar.setClickable(false);
     Resources res = getResources();
     Tienda tienda = new Tienda();
     tienda.setNombre(nombre);
+    tienda.setDireccion(direccion);
+    tienda.setLatitud(Double.parseDouble(latitud));
+    tienda.setLongitud(Double.parseDouble(longitud));
     if (isNetworkAvailable()) {
       String url = res.getString(R.string.tienda_url) + "nuevoTienda";
       sendTask(url, tienda);
@@ -102,6 +113,9 @@ public class NuevoTienda extends AppCompatActivity {
         Internetop interopera=Internetop.getInstance();
         List<Parametro> params = new ArrayList<>();
         params.add(new Parametro("nombre", tienda.getNombre()));
+        params.add(new Parametro("direccion", tienda.getDireccion()));
+        params.add(new Parametro("latitud", String.valueOf(tienda.getLatitud())));
+        params.add(new Parametro("longitud", String.valueOf(tienda.getLongitud())));
         String result = interopera.postText(url,params);
         System.out.println(url);
         handler.post(new Runnable() {

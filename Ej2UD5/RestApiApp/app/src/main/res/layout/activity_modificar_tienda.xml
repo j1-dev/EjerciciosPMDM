@@ -19,7 +19,7 @@
                 android:id="@+id/tv_modificar_tienda_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nombre del tienda"
+                android:text="Nombre de la tienda"
                 android:textColor="#000000"
                 android:textSize="20dp" />
 
@@ -31,11 +31,62 @@
                 android:layout_below="@id/tv_modificar_tienda_name"
                 android:hint="@string/write_here"/>
 
+            <TextView
+                android:id="@+id/tv_modificar_tienda_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/et_modificar_tienda_name"
+                android:text="Direccion"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/et_modificar_tienda_address"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_modificar_tienda_address"
+                android:hint="@string/write_here"/>
+
+            <TextView
+                android:id="@+id/tv_modificar_tienda_latitude"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/et_modificar_tienda_address"
+                android:text="Latitud"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/et_modificar_tienda_latitude"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_modificar_tienda_latitude"
+                android:hint="@string/write_here"/>
+
+            <TextView
+                android:id="@+id/tv_modificar_tienda_longitude"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/et_modificar_tienda_latitude"
+                android:text="Longitud"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/et_modificar_tienda_longitude"
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_modificar_tienda_longitude"
+                android:hint="@string/write_here"/>
+
             <Button
                 android:id="@+id/bt_modificar_accept_tienda"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/et_modificar_tienda_name"
+                android:layout_below="@id/et_modificar_tienda_longitude"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="40dp"
                 android:text="Aceptar"

@@ -12,15 +12,6 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:background="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Personas"
-            android:textSize="40dp"
-            android:fontWeight="700"
-            android:layout_margin="10dp"/>
-
-        <TextView
             android:id="@+id/tv_empty_personas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,8 +22,7 @@
         <ListView
             android:id="@+id/lv_personas"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="70dp"/>
+            android:layout_height="wrap_content" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_nuevo_persona"
