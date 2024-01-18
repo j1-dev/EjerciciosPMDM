@@ -101,7 +101,6 @@ public class PersonasAdapter extends BaseAdapter {
   }
 
   public interface PersonasAdapterCallback {
-    public void verTiendasPressed(int position);
     public void eliminarPressed(int position);
     public void editarPressed(int position) throws JSONException;
   }

@@ -13,7 +13,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -24,12 +26,13 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.example.restapiapp.adaptadores.TiendasAdapter;
 import com.example.restapiapp.entidades.Tienda;
 import com.example.restapiapp.util.DBHelper;
 import com.example.restapiapp.util.Internetop;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +42,8 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class PersonaActivity extends AppCompatActivity implements TiendasAdapter.TiendasAdapterCallback {
+public class PersonaFragment extends Fragment implements TiendasAdapter.TiendasAdapterCallback {
+  private View thisView;
   private int position;
   private int idPersona;
   private DBHelper dbHelper;
@@ -58,32 +62,39 @@ public class PersonaActivity extends AppCompatActivity implements TiendasAdapter
       });
 
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_persona);
-    if(savedInstanceState!=null){
-      position = savedInstanceState.getInt("position",-1);
-      idPersona = savedInstanceState.getInt("idPersona",-1);
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    thisView = inflater.inflate(R.layout.fragment_persona, container, false);
+
+    if (getArguments() != null) {
+      position = getArguments().getInt("position", -1);
+      idPersona = getArguments().getInt("idPersona", -1);
     }
-    else{
-      Intent intent = getIntent();
-      position = intent.getIntExtra("position", -1);
-      idPersona = intent.getIntExtra("idPersona",-1);
-    }
-    dbHelper=DBHelper.getInstance(this);
-    listView=findViewById(R.id.lv_tiendas);
+
+    dbHelper = DBHelper.getInstance(getActivity());
+    listView = thisView.findViewById(R.id.lv_tiendas);
+
+    FloatingActionButton fabNuevoTienda = thisView.findViewById(R.id.fab_nuevo_tienda);
+    fabNuevoTienda.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        irNuevoTienda(v);
+      }
+    });
+
     cargarTiendas();
+
+    return thisView;
   }
 
   public void irNuevoTienda(View view){
-    Intent myIntent = new Intent().setClass(this, NuevoTienda.class);
+    Intent myIntent = new Intent().setClass(thisView.getContext(), NuevoTienda.class);
     myIntent.putExtra("position", position);
     myIntent.putExtra("idPersona", idPersona);
     nuevoResultLauncher.launch(myIntent);
   }
 
   private Boolean isNetworkAvailable() {
-    ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+    ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
       Network nw = connectivityManager.getActiveNetwork();
@@ -116,13 +127,13 @@ public class PersonaActivity extends AppCompatActivity implements TiendasAdapter
       message = res.getString(R.string.error_unknown);
       duration = Toast.LENGTH_SHORT;
     }
-    Toast toast = Toast.makeText(this, message, duration);
+    Toast toast = Toast.makeText(thisView.getContext(), message, duration);
     toast.show();
   }
 
   private void cargarTiendas(){
     if (isNetworkAvailable()) {
-      ProgressBar pbMain = (ProgressBar) findViewById(R.id.pb_tiendas);
+      ProgressBar pbMain = (ProgressBar) thisView.findViewById(R.id.pb_tiendas);
       pbMain.setVisibility(View.VISIBLE);
       Resources res = getResources();
       String url = res.getString(R.string.tienda_url) + "listaTiendas" + (idPersona) ;
@@ -177,13 +188,13 @@ public class PersonaActivity extends AppCompatActivity implements TiendasAdapter
         tiendas.add(tienda);
       }
 
-      tiendasAdapter = new TiendasAdapter(this,tiendas);
+      tiendasAdapter = new TiendasAdapter(thisView.getContext(),tiendas);
       tiendasAdapter.setCallback(this);
       listView.setAdapter(tiendasAdapter);
 
-      ProgressBar pbMain = findViewById(R.id.pb_tiendas);
+      ProgressBar pbMain = thisView.findViewById(R.id.pb_tiendas);
       pbMain.setVisibility(View.GONE);
-      TextView noData = findViewById(R.id.tv_empty_tiendas);
+      TextView noData = thisView.findViewById(R.id.tv_empty_tiendas);
       noData.setVisibility(View.GONE);
       if(tiendas.size() == 0) {
         noData.setVisibility(View.VISIBLE);
@@ -192,9 +203,6 @@ public class PersonaActivity extends AppCompatActivity implements TiendasAdapter
     catch (JSONException e) {
       showError(e.getMessage());
     }
-  }
-  public void back(View view){
-    this.finish();
   }
 
   @Override
@@ -205,7 +213,7 @@ public class PersonaActivity extends AppCompatActivity implements TiendasAdapter
 
   private AlertDialog AskOption(final int position)
   {
-    AlertDialog myQuittingDialogBox =new AlertDialog.Builder(this)
+    AlertDialog myQuittingDialogBox =new AlertDialog.Builder(thisView.getContext())
         .setTitle(R.string.eliminar_usuario)
         .setMessage(R.string.are_you_sure)
         .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
@@ -228,7 +236,7 @@ public class PersonaActivity extends AppCompatActivity implements TiendasAdapter
       if(tiendas.size()>position) {
         Tienda tienda = tiendas.get(position);
         if (isNetworkAvailable()) {
-          ProgressBar pbMain = (ProgressBar) findViewById(R.id.pb_tiendas);
+          ProgressBar pbMain = (ProgressBar) thisView.findViewById(R.id.pb_tiendas);
           pbMain.setVisibility(View.VISIBLE);
           Resources res = getResources();
           String url = res.getString(R.string.tienda_url) + "eliminarTienda" + tienda.getIdTienda();
@@ -266,7 +274,7 @@ public class PersonaActivity extends AppCompatActivity implements TiendasAdapter
               showError("error.desconocido");
             }
             else{
-              ProgressBar pbMain = (ProgressBar) findViewById(R.id.pb_tiendas);
+              ProgressBar pbMain = (ProgressBar) thisView.findViewById(R.id.pb_tiendas);
               pbMain.setVisibility(View.GONE);
               cargarTiendas();
             }
@@ -274,6 +282,15 @@ public class PersonaActivity extends AppCompatActivity implements TiendasAdapter
         });
       }
     });
+  }
+
+  public static PersonaFragment newInstance(int position, int idPersona) {
+    PersonaFragment fragment = new PersonaFragment();
+    Bundle args = new Bundle();
+    args.putInt("position", position);
+    args.putInt("idPersona", idPersona);
+    fragment.setArguments(args);
+    return fragment;
   }
 
   @Override
@@ -288,7 +305,7 @@ public class PersonaActivity extends AppCompatActivity implements TiendasAdapter
             throw new RuntimeException(e);
           }
         });
-        Intent myIntent = new Intent().setClass(this, ModificarTienda.class);
+        Intent myIntent = new Intent().setClass(thisView.getContext(), ModificarTienda.class);
         myIntent.putExtra("tienda", tienda.toJSON().toString());
         nuevoResultLauncher.launch(myIntent);
       }

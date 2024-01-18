@@ -31,7 +31,10 @@
             android:name=".ModificarPersona"
             android:exported="false" />
         <activity
-            android:name=".PersonaActivity"
+            android:name=".PersonaFragment"
+            android:exported="false" />
+        <activity
+            android:name=".MainFragment"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

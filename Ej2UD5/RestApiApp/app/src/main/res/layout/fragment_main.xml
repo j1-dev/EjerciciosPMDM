@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainFragment">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Personas"
+            android:textSize="40dp"
+            android:fontWeight="700"
+            android:layout_margin="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_empty_personas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="no hay datos"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"/>
+
+        <ListView
+            android:id="@+id/lv_personas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="70dp"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_nuevo_persona"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            android:padding="0dp"
+            app:fabCustomSize="80dp"
+            android:layout_margin="40dp"
+            android:src="@drawable/ic_add_white"
+            app:maxImageSize="80dp"
+            app:borderWidth="0dp"
+            android:elevation="0dp"
+            app:elevation="0dp"
+            app:backgroundTint="@color/molon"/>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pb_personas"
+            android:layout_below="@id/lv_personas"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+</FrameLayout>
