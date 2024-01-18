@@ -28,7 +28,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class NuevoPersona extends AppCompatActivity {
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -39,7 +38,6 @@ public class NuevoPersona extends AppCompatActivity {
   public void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
   }
-
 
   private Boolean isNetworkAvailable() {
     ConnectivityManager connectivityManager = (ConnectivityManager)
@@ -79,6 +77,10 @@ public class NuevoPersona extends AppCompatActivity {
     }
     if(dni.isEmpty()){
       textDni.setError(res.getString(R.string.campo_obligatorio));
+      continuar=false;
+    }
+    if(!isValidDNI(dni)){
+      textDni.setError("El dni no tiene el formato correcto");
       continuar=false;
     }
 
@@ -153,6 +155,23 @@ public class NuevoPersona extends AppCompatActivity {
     Toast toast = Toast.makeText(context, message, duration);
     toast.setGravity(Gravity.CENTER, 0, 0);
     toast.show();
+  }
+
+  public static boolean isValidDNI(String dni) {
+    // Check if the length is correct
+    if (dni.length() != 9) {
+      return false;
+    }
+
+    // Check if the first 8 characters are digits
+    String digitsPart = dni.substring(0, 8);
+    if (!digitsPart.matches("\\d+")) {
+      return false;
+    }
+
+    // Check if the last character is a letter
+    char lastChar = dni.charAt(8);
+    return Character.isLetter(lastChar);
   }
 
   public void back(View view) {

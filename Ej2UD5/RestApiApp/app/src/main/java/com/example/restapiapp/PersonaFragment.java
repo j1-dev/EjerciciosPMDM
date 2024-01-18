@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -26,12 +28,19 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.restapiapp.adaptadores.TiendasAdapter;
 import com.example.restapiapp.entidades.Tienda;
-import com.example.restapiapp.util.DBHelper;
 import com.example.restapiapp.util.Internetop;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.Priority;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -44,9 +53,29 @@ import java.util.concurrent.Executors;
 
 public class PersonaFragment extends Fragment implements TiendasAdapter.TiendasAdapterCallback {
   private View thisView;
-  private int position;
-  private int idPersona;
-  private DBHelper dbHelper;
+  private LocationRequest mLocationRequest;
+  private LocationCallback mLocationCallback;
+  private FusedLocationProviderClient mFusedLocationProviderClient;
+  private Location location;
+  private ActivityResultLauncher<String[]> locationPermissionRequest =
+      registerForActivityResult(new ActivityResultContracts
+              .RequestMultiplePermissions(), result -> {
+            Boolean fineLocationGranted = result.getOrDefault(
+                android.Manifest.permission.ACCESS_FINE_LOCATION, false);
+            Boolean coarseLocationGranted = result.getOrDefault(
+                android.Manifest.permission.ACCESS_COARSE_LOCATION, false);
+            if (fineLocationGranted != null && fineLocationGranted) {
+              solicitarUbicacion();
+            } else if (coarseLocationGranted != null && coarseLocationGranted) {
+              solicitarUbicacion();
+            } else {
+              showError("No tienes permisos");
+            }
+          }
+      );
+
+  private double latitud;
+  private double longitud;
   private ArrayList<Tienda> tiendas;
   private TiendasAdapter tiendasAdapter;
   private ListView listView;
@@ -62,15 +91,32 @@ public class PersonaFragment extends Fragment implements TiendasAdapter.TiendasA
       });
 
   @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+
+    mLocationRequest = new LocationRequest.Builder(1000)
+        .setMinUpdateIntervalMillis(500)
+        .setMaxUpdateDelayMillis(1000)
+        .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
+        .build();
+    mLocationCallback = new LocationCallback() {
+      @Override
+      public void onLocationResult(LocationResult locationResult) {
+        if (locationResult == null) {
+          return;
+        }
+        for (Location location : locationResult.getLocations()) {
+          guardarUbicacion(location);
+          cargarTiendas();
+        }
+      }
+    };
+    mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
+  }
+  @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     thisView = inflater.inflate(R.layout.fragment_persona, container, false);
 
-    if (getArguments() != null) {
-      position = getArguments().getInt("position", -1);
-      idPersona = getArguments().getInt("idPersona", -1);
-    }
-
-    dbHelper = DBHelper.getInstance(getActivity());
     listView = thisView.findViewById(R.id.lv_tiendas);
 
     FloatingActionButton fabNuevoTienda = thisView.findViewById(R.id.fab_nuevo_tienda);
@@ -81,15 +127,11 @@ public class PersonaFragment extends Fragment implements TiendasAdapter.TiendasA
       }
     });
 
-    cargarTiendas();
-
     return thisView;
   }
 
   public void irNuevoTienda(View view){
     Intent myIntent = new Intent().setClass(thisView.getContext(), NuevoTienda.class);
-    myIntent.putExtra("position", position);
-    myIntent.putExtra("idPersona", idPersona);
     nuevoResultLauncher.launch(myIntent);
   }
 
@@ -110,6 +152,7 @@ public class PersonaFragment extends Fragment implements TiendasAdapter.TiendasA
       return nwInfo != null && nwInfo.isConnected();
     }
   }
+
   private void showError(String error) {
     String message;
     Resources res = getResources();
@@ -131,12 +174,31 @@ public class PersonaFragment extends Fragment implements TiendasAdapter.TiendasA
     toast.show();
   }
 
+  private void solicitarUbicacion() {
+    if (ActivityCompat.checkSelfPermission(getActivity(),
+        android.Manifest.permission.ACCESS_FINE_LOCATION) !=
+        PackageManager.PERMISSION_GRANTED
+        && ActivityCompat.checkSelfPermission(getActivity(),
+        android.Manifest.permission.ACCESS_COARSE_LOCATION)
+        != PackageManager.PERMISSION_GRANTED) {
+      return;
+    }
+    mFusedLocationProviderClient.requestLocationUpdates(mLocationRequest,
+        mLocationCallback, Looper.getMainLooper());
+  }
+
+  private void guardarUbicacion(Location location){
+    latitud = location.getLatitude();
+    longitud = location.getLongitude();
+    System.out.println(latitud+", "+longitud);
+  }
+
   private void cargarTiendas(){
     if (isNetworkAvailable()) {
       ProgressBar pbMain = (ProgressBar) thisView.findViewById(R.id.pb_tiendas);
       pbMain.setVisibility(View.VISIBLE);
       Resources res = getResources();
-      String url = res.getString(R.string.tienda_url) + "listaTiendas" + (idPersona) ;
+      String url = res.getString(R.string.tienda_url) + "listaTiendas?userLatitude=" + latitud + "&userLongitude=" + longitud;
       System.out.println(url);
       getListaTask(url);
     }
@@ -153,6 +215,7 @@ public class PersonaFragment extends Fragment implements TiendasAdapter.TiendasA
       public void run() {
         Internetop interopera = Internetop.getInstance();
         String result = interopera.getString(url);
+        System.out.println(result);
         handler.post(new Runnable() {
           @Override
           public void run() {
@@ -184,7 +247,6 @@ public class PersonaFragment extends Fragment implements TiendasAdapter.TiendasA
         JSONObject jsonObject = listaTiendas.getJSONObject(i);
         Tienda tienda = new Tienda();
         tienda.fromJSON(jsonObject);
-        System.out.println(tienda.toJSON().toString());
         tiendas.add(tienda);
       }
 
@@ -211,8 +273,7 @@ public class PersonaFragment extends Fragment implements TiendasAdapter.TiendasA
     diaBox.show();
   }
 
-  private AlertDialog AskOption(final int position)
-  {
+  private AlertDialog AskOption(final int position) {
     AlertDialog myQuittingDialogBox =new AlertDialog.Builder(thisView.getContext())
         .setTitle(R.string.eliminar_usuario)
         .setMessage(R.string.are_you_sure)
@@ -231,7 +292,7 @@ public class PersonaFragment extends Fragment implements TiendasAdapter.TiendasA
     return myQuittingDialogBox;
   }
 
-  private void eliminarTienda(int position){
+  private void eliminarTienda(int position) {
     if(tiendas!=null){
       if(tiendas.size()>position) {
         Tienda tienda = tiendas.get(position);
@@ -255,7 +316,7 @@ public class PersonaFragment extends Fragment implements TiendasAdapter.TiendasA
     }
   }
 
-  private void eliminarTask(String url){
+  private void eliminarTask(String url) {
     ExecutorService executor = Executors.newSingleThreadExecutor();
     Handler handler = new Handler(Looper.getMainLooper());
     executor.execute(new Runnable() {
@@ -310,5 +371,32 @@ public class PersonaFragment extends Fragment implements TiendasAdapter.TiendasA
         nuevoResultLauncher.launch(myIntent);
       }
     }
+  }
+
+  @Override
+  public void onResume() {
+    super.onResume();
+    if ((ContextCompat.checkSelfPermission(getActivity(),
+        android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
+        PackageManager.PERMISSION_GRANTED) ||
+        (ContextCompat.checkSelfPermission(getActivity(),
+            android.Manifest.permission.ACCESS_FINE_LOCATION) ==
+            PackageManager.PERMISSION_GRANTED)) {
+      solicitarUbicacion();
+    } else {
+      String[] permisos = {android.Manifest.permission.ACCESS_FINE_LOCATION,
+          android.Manifest.permission.ACCESS_COARSE_LOCATION};
+      locationPermissionRequest.launch(permisos);
+    }
+  }
+
+  @Override
+  public void onPause() {
+    super.onPause();
+    detenerUbicacion();
+  }
+
+  private void detenerUbicacion() {
+    mFusedLocationProviderClient.removeLocationUpdates(mLocationCallback);
   }
 }

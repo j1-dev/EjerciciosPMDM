@@ -9,15 +9,17 @@ public class Tienda {
   private String direccion;
   private double latitud;
   private double longitud;
+  private double distancia;
 
   public Tienda() {}
 
-  public Tienda(Long idTienda, String nombre, String direccion, double latitud, double longitud) {
+  public Tienda(Long idTienda, String nombre, String direccion, double latitud, double longitud, double distancia) {
     this.idTienda = idTienda;
     this.nombre = nombre;
     this.direccion = direccion;
     this.latitud = latitud;
     this.longitud = longitud;
+    this.distancia = distancia;
   }
 
   public Long getIdTienda() {
@@ -60,6 +62,14 @@ public class Tienda {
     this.longitud = longitud;
   }
 
+  public double getDistancia() {
+    return distancia;
+  }
+
+  public void setDistancia(double distancia) {
+    this.distancia = distancia;
+  }
+
   public void fromJSON(JSONObject jsonObject) throws JSONException {
     if (!jsonObject.isNull("idTienda")) {
       this.idTienda = jsonObject.getLong("idTienda");
@@ -86,6 +96,11 @@ public class Tienda {
     } else {
       this.longitud = 0.0;
     }
+    if (!jsonObject.isNull("distancia")) {
+      this.distancia = jsonObject.getDouble("distancia");
+    } else {
+      this.distancia = 0.0;
+    }
   }
 
   public void fromJSONString(String string) throws JSONException {
@@ -100,6 +115,7 @@ public class Tienda {
     jsonObject.put("direccion", direccion);
     jsonObject.put("latitud", latitud);
     jsonObject.put("longitud", longitud);
+    jsonObject.put("distancia", distancia);
     return jsonObject;
   }
 
@@ -111,6 +127,7 @@ public class Tienda {
         ", direccion='" + direccion + '\'' +
         ", latitud=" + latitud +
         ", longitud=" + longitud +
+        ", distancia=" + distancia +
         '}';
   }
 }

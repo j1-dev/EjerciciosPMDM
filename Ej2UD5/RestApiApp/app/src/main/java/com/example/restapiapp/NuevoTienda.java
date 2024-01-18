@@ -21,7 +21,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.restapiapp.entidades.Tienda;
 import com.example.restapiapp.entidades.Parametro;
-import com.example.restapiapp.util.DBHelper;
 import com.example.restapiapp.util.Internetop;
 
 import java.util.ArrayList;
@@ -30,24 +29,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class NuevoTienda extends AppCompatActivity {
-  private int position;
-  private int idPersona;
-  private DBHelper dbHelper;
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_nuevo_tienda);
-    if(savedInstanceState!=null){/*Si hemos hecho onSaveInstanceState previamente y hemos almacenado información,
-        la recuperamos*/
-      position = savedInstanceState.getInt("position",-1);
-      idPersona = savedInstanceState.getInt("idPersona", -1);
-    }
-    else{//Si es la primera vez que se crea la actividad, obtenemos la información que pasamos a través del Intent
-      Intent intent = getIntent();
-      position = intent.getIntExtra("position", -1);
-      idPersona = intent.getIntExtra("idPersona", -1);
-    }
   }
 
   @Override
@@ -74,9 +59,6 @@ public class NuevoTienda extends AppCompatActivity {
   }
 
   public void aceptar(View view) {
-    if(dbHelper==null){
-      dbHelper=DBHelper.getInstance(this);
-    }
     EditText textNombre = findViewById(R.id.et_nuevo_tienda_name);
     EditText textDireccion = findViewById(R.id.et_nuevo_tienda_address);
     EditText textLatitud = findViewById(R.id.et_nuevo_tienda_latitude);
@@ -86,17 +68,49 @@ public class NuevoTienda extends AppCompatActivity {
     String direccion = textDireccion.getText().toString();
     String latitud = textLatitud.getText().toString();
     String longitud = textLongitud.getText().toString();
+    double lat = 0.0;
+    double lon = 0.0;
 
-    Button btAceptar= findViewById(R.id.bt_nuevo_accept);
-    btAceptar.setEnabled(false);
-    btAceptar.setClickable(false);
     Resources res = getResources();
-    Tienda tienda = new Tienda();
-    tienda.setNombre(nombre);
-    tienda.setDireccion(direccion);
-    tienda.setLatitud(Double.parseDouble(latitud));
-    tienda.setLongitud(Double.parseDouble(longitud));
-    if (isNetworkAvailable()) {
+    boolean continuar=true;
+    if(nombre.isEmpty()){
+      textNombre.setError(res.getString(R.string.campo_obligatorio));
+      continuar=false;
+    }
+    if(direccion.isEmpty()){
+      textDireccion.setError(res.getString(R.string.campo_obligatorio));
+      continuar=false;
+    }
+    if(latitud.isEmpty()){
+      textLatitud.setError(res.getString(R.string.campo_obligatorio));
+      continuar=false;
+    }
+    if(longitud.isEmpty()){
+      textLongitud.setError(res.getString(R.string.campo_obligatorio));
+      continuar=false;
+    }
+    try{
+      lat = Double.parseDouble(latitud);
+    } catch (NumberFormatException e) {
+      continuar=false;
+      textLatitud.setError("La latitud debe ser un número decimal");
+    }
+    try{
+      lon = Double.parseDouble(longitud);
+    } catch (NumberFormatException e) {
+      continuar=false;
+      textLongitud.setError("La longitud debe ser un número decimal");
+    }
+
+    if (isNetworkAvailable() && continuar) {
+      Button btAceptar= findViewById(R.id.bt_nuevo_accept_tienda);
+      btAceptar.setEnabled(false);
+      btAceptar.setClickable(false);
+      Tienda tienda = new Tienda();
+      tienda.setNombre(nombre);
+      tienda.setDireccion(direccion);
+      tienda.setLatitud(lat);
+      tienda.setLongitud(lon);
       String url = res.getString(R.string.tienda_url) + "nuevoTienda";
       sendTask(url, tienda);
     } else {
@@ -121,7 +135,7 @@ public class NuevoTienda extends AppCompatActivity {
         handler.post(new Runnable() {
           @Override
           public void run() {
-            Button btAceptar= findViewById(R.id.bt_nuevo_accept);//Volvemos a activar el botón aceptar
+            Button btAceptar= findViewById(R.id.bt_nuevo_accept_tienda);//Volvemos a activar el botón aceptar
             btAceptar.setEnabled(true);
             btAceptar.setClickable(true);
             long idCreado;

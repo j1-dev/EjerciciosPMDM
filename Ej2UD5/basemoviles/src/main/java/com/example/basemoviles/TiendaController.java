@@ -1,5 +1,7 @@
 package com.example.basemoviles;
 
+import com.example.basemoviles.entidades.GeoUtils;
+import com.example.basemoviles.entidades.Persona;
 import com.example.basemoviles.entidades.Tienda;
 import com.example.basemoviles.repositorios.TiendaRepositorio;
 
@@ -9,10 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/tiendaapi")
@@ -24,14 +23,22 @@ public class TiendaController {
   }
 
   @GetMapping("/listaTiendas")
-  public List<Tienda> getTiendas(){
+  public List<Tienda> getTiendas(@RequestParam double userLatitude, @RequestParam double userLongitude){
     Iterable<Tienda> iterar=tiendaRepositorio.findAll();
     Iterator<Tienda> iterus=iterar.iterator();
-    List<Tienda> resultado=new ArrayList<>();
+    List<Tienda> tiendas = new ArrayList<>();
     while(iterus.hasNext()){
-      resultado.add(iterus.next());
+      Tienda tienda = iterus.next();
+      double tiendaLatitude = tienda.getLatitud();
+      double tiendaLongitude = tienda.getLongitud();
+      double distance = GeoUtils.haversine(userLatitude, userLongitude, tiendaLatitude, tiendaLongitude);
+      tienda.setDistancia(distance);
+      tiendas.add(tienda);
     }
-    return resultado;
+
+    tiendas.sort(Comparator.comparingDouble(Tienda::getDistancia));;
+
+    return tiendas;
   }
 
   @GetMapping("/getTienda{id}")
@@ -47,6 +54,7 @@ public class TiendaController {
   @PutMapping("/actualizarTienda")
   public ResponseEntity<Long> modificar(@RequestBody Tienda tienda)
       throws URISyntaxException {
+    System.out.println(tienda.toString());
     Tienda tiendaCreado = tiendaRepositorio.save(tienda);
     if (tiendaCreado == null) {
       return ResponseEntity.notFound().build();

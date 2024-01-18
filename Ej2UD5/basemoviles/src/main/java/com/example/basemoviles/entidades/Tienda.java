@@ -21,6 +21,8 @@ public class Tienda {
   private String direccion;
   private double latitud;
   private double longitud;
+  @Transient
+  private double distancia;
 
   public Tienda() {}
 
@@ -70,6 +72,14 @@ public class Tienda {
 
   public void setLongitud(double longitud) {
     this.longitud = longitud;
+  }
+
+  public double getDistancia() {
+    return distancia;
+  }
+
+  public void setDistancia(double distancia) {
+    this.distancia = distancia;
   }
 
   @Override

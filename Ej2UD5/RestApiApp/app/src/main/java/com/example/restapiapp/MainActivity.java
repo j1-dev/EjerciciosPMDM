@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
   @Override
   public boolean onNavigationItemSelected(@NonNull MenuItem item) {
     int titleId = getTitulo(item);
-    System.out.println("AAAAAAAAAAAa");
     mostrarFragmento(titleId);
     drawerLayout.closeDrawer(GravityCompat.START);
     return true;
@@ -82,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     else{
       fragment = PersonaFragment.newInstance(1,2);
-      titulo="Tienda";
+      titulo="Tiendas";
     }
     getSupportFragmentManager()
         .beginTransaction()

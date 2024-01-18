@@ -6,8 +6,15 @@
         android:id="@+id/tv_li_nombre_tienda"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Yo Robot"
+        android:text="a"
         android:layout_margin="10dp"/>
+    <TextView
+        android:id="@+id/tv_li_distancia_tienda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_li_nombre_tienda"
+        android:text="b"
+        android:layout_marginHorizontal="10dp"/>
     <ImageButton
         android:id="@+id/bt_li_delete"
         android:layout_width="20dp"

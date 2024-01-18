@@ -66,6 +66,7 @@ public class PersonasAdapter extends BaseAdapter {
     }
     Persona persona = personas.get(position);
     alWrapper.nombreApellidos.setText(persona.getNombre()+" "+persona.getApellidos());
+    alWrapper.dni.setText(persona.getDni());
 
     alWrapper.editar.setOnClickListener(new View.OnClickListener() {
       @Override

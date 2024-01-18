@@ -1,5 +1,7 @@
 package com.example.restapiapp;
 
+import static com.example.restapiapp.NuevoPersona.isValidDNI;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -64,9 +66,11 @@ public class ModificarPersona extends AppCompatActivity {
   private void fillInformation() {
     EditText textNombre = findViewById(R.id.et_modificar_name);
     EditText textApellidos = findViewById(R.id.et_modificar_surname);
+    EditText dni = findViewById(R.id.et_modificar_dni);
 
     textNombre.setText(persona.getNombre());
     textApellidos.setText(persona.getApellidos());
+    dni.setText(persona.getDni());
   }
 
   @Override
@@ -119,6 +123,11 @@ public class ModificarPersona extends AppCompatActivity {
       textDni.setError(res.getString(R.string.campo_obligatorio));
       continuar=false;
     }
+    if(!isValidDNI(dni)){
+      textDni.setError("El dni no tiene el formato correcto");
+      continuar=false;
+    }
+
     if(continuar){
       Button btAceptar=findViewById(R.id.bt_modificar_accept);
       ProgressBar pbAceptar=findViewById(R.id.pb_modificar_persona);

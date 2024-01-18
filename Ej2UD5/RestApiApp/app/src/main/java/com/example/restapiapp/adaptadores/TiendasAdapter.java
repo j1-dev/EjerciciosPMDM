@@ -14,6 +14,7 @@ import com.example.restapiapp.R;
 
 import org.json.JSONException;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class TiendasAdapter extends BaseAdapter {
@@ -57,6 +58,7 @@ public class TiendasAdapter extends BaseAdapter {
       LayoutInflater inflater = ((Activity) context).getLayoutInflater();
       item = inflater.inflate(R.layout.tienda_item, parent, false);
       liWrapper.nombre = item.findViewById(R.id.tv_li_nombre_tienda);
+      liWrapper.distancia = item.findViewById(R.id.tv_li_distancia_tienda);
       liWrapper.editar = item.findViewById(R.id.bt_li_update);
       liWrapper.eliminar = item.findViewById(R.id.bt_li_delete);
       item.setTag(liWrapper);
@@ -65,6 +67,8 @@ public class TiendasAdapter extends BaseAdapter {
     }
     Tienda tienda = tiendas.get(position);
     liWrapper.nombre.setText(tienda.getNombre());
+    DecimalFormat decimalFormat = new DecimalFormat("#.##");
+    liWrapper.distancia.setText("A " + decimalFormat.format(tienda.getDistancia())+" millas de tí");
     liWrapper.editar.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -86,6 +90,7 @@ public class TiendasAdapter extends BaseAdapter {
 
   static class TiendaWrapper {
     TextView nombre;
+    TextView distancia;
     ImageButton eliminar;
     ImageButton editar;
   }

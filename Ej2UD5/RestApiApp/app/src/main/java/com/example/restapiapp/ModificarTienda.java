@@ -21,7 +21,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.restapiapp.entidades.Parametro;
 import com.example.restapiapp.entidades.Tienda;
-import com.example.restapiapp.util.DBHelper;
 import com.example.restapiapp.util.Internetop;
 
 import org.json.JSONException;
@@ -32,16 +31,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ModificarTienda extends AppCompatActivity {
-  private int position;
   private Tienda tienda;
-  private DBHelper dbHelper;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_modificar_tienda);
     if(savedInstanceState!=null){
-      position = savedInstanceState.getInt("position",-1);
       try {
         tienda.fromJSONString(savedInstanceState.getString("tienda"));
       } catch (JSONException e) {
@@ -50,7 +46,6 @@ public class ModificarTienda extends AppCompatActivity {
     }
     else{
       Intent intent = getIntent();
-      position = intent.getIntExtra("position", -1);
       tienda = new Tienda();
       try {
         tienda.fromJSONString(intent.getStringExtra("tienda"));
@@ -69,8 +64,8 @@ public class ModificarTienda extends AppCompatActivity {
 
     textNombre.setText(tienda.getNombre());
     textDireccion.setText(tienda.getDireccion());
-    textLatitud.setText((int) tienda.getLatitud());
-    textLongitud.setText((int) tienda.getLongitud());
+    textLatitud.setText(String.valueOf(tienda.getLatitud()));
+    textLongitud.setText(String.valueOf(tienda.getLongitud()));
   }
 
   @Override
@@ -102,9 +97,6 @@ public class ModificarTienda extends AppCompatActivity {
   }
 
   public void aceptar(View view) {
-    if(dbHelper==null){
-      dbHelper=DBHelper.getInstance(this);
-    }
     EditText textNombre = findViewById(R.id.et_modificar_tienda_name);
     EditText textDireccion = findViewById(R.id.et_modificar_tienda_address);
     EditText textLatitud = findViewById(R.id.et_modificar_tienda_latitude);
@@ -114,13 +106,45 @@ public class ModificarTienda extends AppCompatActivity {
     String direccion = textDireccion.getText().toString();
     String latitud = textLatitud.getText().toString();
     String longitud = textLongitud.getText().toString();
+    double lat = 0.0;
+    double lon = 0.0;
 
-    Button btAceptar = findViewById(R.id.bt_modificar_accept_tienda);
-    btAceptar.setEnabled(false);
-    btAceptar.setClickable(false);
     Resources res = getResources();
-    if (isNetworkAvailable()) {
-      String url = res.getString(R.string.tienda_url) + ("actualizarTienda"+tienda.getIdTienda());
+    boolean continuar=true;
+    if(nombre.isEmpty()){
+      textNombre.setError(res.getString(R.string.campo_obligatorio));
+      continuar=false;
+    }
+    if(direccion.isEmpty()){
+      textDireccion.setError(res.getString(R.string.campo_obligatorio));
+      continuar=false;
+    }
+    if(latitud.isEmpty()){
+      textLatitud.setError(res.getString(R.string.campo_obligatorio));
+      continuar=false;
+    }
+    if(longitud.isEmpty()){
+      textLongitud.setError(res.getString(R.string.campo_obligatorio));
+      continuar=false;
+    }
+    try{
+      lat = Double.parseDouble(latitud);
+    } catch (NumberFormatException e) {
+      continuar=false;
+      textLatitud.setError("La latitud debe ser un número decimal");
+    }
+    try{
+      lon = Double.parseDouble(longitud);
+    } catch (NumberFormatException e) {
+      continuar=false;
+      textLongitud.setError("La longitud debe ser un número decimal");
+    }
+
+    if (isNetworkAvailable() && continuar) {
+      Button btAceptar = findViewById(R.id.bt_modificar_accept_tienda);
+      btAceptar.setEnabled(false);
+      btAceptar.setClickable(false);
+      String url = res.getString(R.string.tienda_url) + ("actualizarTienda");
       sendTask(url, nombre, direccion, latitud, longitud);
       System.out.println(url);
     } else {
@@ -137,11 +161,13 @@ public class ModificarTienda extends AppCompatActivity {
         Internetop interopera=Internetop.getInstance();
 
         List<Parametro> params = new ArrayList<>();
+        params.add(new Parametro("idTienda", tienda.getIdTienda()+""));
         params.add(new Parametro("nombre", nombre));
         params.add(new Parametro("direccion", direccion));
         params.add(new Parametro("latitud", latitud));
         params.add(new Parametro("longitud", longitud));
         String result = interopera.putText(url,params);
+        System.out.println(result);
         handler.post(new Runnable() {
           @Override
           public void run() {
