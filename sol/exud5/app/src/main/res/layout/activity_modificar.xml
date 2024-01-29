@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Modificar">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_modificar_nombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="@string/name"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/et_modificar_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:hint="@string/write_here"
+                android:layout_below="@id/tv_modificar_nombre"/>
+
+            <RadioGroup
+                android:id="@+id/rg_modificar_tipo"
+                android:layout_below="@id/et_modificar_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RadioButton android:id="@+id/rb_modificar_social"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/social"/>
+
+                <RadioButton android:id="@+id/rb_modificar_medical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/medical_appointment"/>
+
+                <RadioButton android:id="@+id/rb_modificar_profesional"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/professional"/>
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/tv_modificar_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="@string/date"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/rg_modificar_tipo"/>
+
+            <EditText
+                android:id="@+id/et_modificar_date"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:hint="yyyy-MM-dd"
+                android:gravity="center"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/rg_modificar_tipo"/>
+
+            <Button
+                android:id="@+id/bt_modificar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/aceptar"
+                android:onClick="aceptar"
+                android:layout_below="@id/tv_modificar_date"/>
+
+            <ProgressBar
+                android:id="@+id/pb_modificar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

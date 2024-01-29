@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">exud5</string>
+    <string name="main_url">http://10.0.2.2:8080/eventapi/</string>
+    <string name="no_results">No results</string>
+    <string name="error_connection">Connection error</string>
+    <string name="error_undelivered">The message could not be sent</string>
+    <string name="error_unknown">Unknown error</string>
+    <string name="name">Name</string>
+    <string name="write_here">Write here</string>
+    <string name="apellidos">Surname</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="date">Date</string>
+    <string name="social">Social</string>
+    <string name="medical_appointment">Medical appointment</string>
+    <string name="professional">Professional</string>
+    <string name="dni">National identification number</string>
+    <string name="aceptar">Accept</string>
+    <string name="campo_obligatorio">Compulsory field</string>
+    <string name="incorrect_date_format">Incorrect date format</string>
+    <string name="eliminar_usuario">Delete user</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+</resources>
